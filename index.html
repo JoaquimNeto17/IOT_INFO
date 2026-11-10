@@ -1,0 +1,789 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Infográfico digital interativo sobre tecnologia 5G e IoT com simulação educativa de irrigação inteligente.">
+<meta name="theme-color" content="#FBFAF8">
+<title>Rede Viva 5G | Infográfico interativo sobre IoT</title>
+<style>
+:root{--bg:#061023;--bg2:#091a31;--panel:#101e36;--panel2:#122542;--line:#294360;--white:#f2f7ff;--soft:#acc0d6;--mint:#61e6c2;--cyan:#57cffe;--purple:#b4a0ff;--yellow:#f4c97a;--red:#ff9089;--r:24px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--white);font-family:Inter,"Segoe UI",Arial,sans-serif;line-height:1.55}button,input{font:inherit}button{cursor:pointer}a{color:var(--mint)}a:hover{color:white}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline-offset:4px}
+body::before{content:"";z-index:-1;position:fixed;inset:0;background:radial-gradient(ellipse 48% 36% at 85% 5%,#254f8740,transparent),radial-gradient(ellipse 47% 36% at 5% 33%,#50429424,transparent),linear-gradient(145deg,#061023,#091326 50%,#061023);pointer-events:none}
+.wrap{width:min(1060px,calc(100% - 42px));margin:auto}.top-line{height:4px;background:linear-gradient(90deg,var(--mint),var(--cyan),var(--purple));position:fixed;top:0;left:0;width:100%;z-index:10}.reading-bar{position:fixed;top:0;left:0;height:4px;width:0%;background:#fff;z-index:11;box-shadow:0 0 16px var(--mint)}
+.topbar{height:82px;display:flex;align-items:center;justify-content:space-between;gap:18px;border-bottom:1px solid #27405966}.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:white}.brand-icon{width:42px;height:42px;border:1px solid #6ae7cd78;border-radius:14px;display:grid;place-items:center;background:#102b43}.brand strong{display:block;letter-spacing:.09em;font-size:14px;line-height:1.1}.brand small{display:block;color:var(--soft);font-size:10px;letter-spacing:.1em;margin-top:4px}.top-link{border:1px solid #375570;border-radius:100px;padding:10px 18px;text-decoration:none;font-size:12px;font-weight:750;letter-spacing:.04em;color:#e5f5ff}.top-link:hover{background:#17344e}
+.hero{padding:79px 0 55px;display:grid;grid-template-columns:1.03fr .97fr;gap:18px;align-items:center}.eyebrow{display:flex;align-items:center;gap:11px;letter-spacing:.19em;text-transform:uppercase;font-size:11px;font-weight:800;color:var(--mint)}.eyebrow:before{content:"";width:22px;height:2px;background:var(--mint)}.hero h1{font-size:clamp(80px,15vw,175px);line-height:.9;letter-spacing:-.1em;margin:16px 0 18px;font-weight:900;background:linear-gradient(126deg,#fff 22%,#84dffa 53%,#ae90fc 84%);background-clip:text;color:transparent}.hero h2{font-size:clamp(29px,3.8vw,48px);line-height:1.08;letter-spacing:-.055em;max-width:530px;margin:0}.hero h2 em{font-style:normal;color:var(--mint)}.hero p{font-size:16px;color:var(--soft);max-width:520px;margin:20px 0 25px}.hero-buttons{display:flex;gap:10px;flex-wrap:wrap}.main-btn{border:0;background:var(--mint);color:#07242a;font-weight:800;border-radius:100px;padding:13px 20px;text-decoration:none;font-size:13px}.main-btn:hover{background:#a9ffe4;color:#073035}.ghost-btn{background:transparent;border:1px solid #4a6682;border-radius:100px;color:#dbeaf6;padding:12px 18px;text-decoration:none;font-size:13px;font-weight:700}.ghost-btn:hover{background:#1b3451}.hero-visual{position:relative;min-height:420px;border:1px solid #335b80;border-radius:30px;background:radial-gradient(circle at 52% 40%,#1b6376a6 0,#173e68aa 21%,#0c1a31 58%,#0a152b 100%);overflow:hidden;box-shadow:0 25px 80px #03091480}.hero-visual:after{content:"";position:absolute;inset:0;background-image:linear-gradient(#7394b411 1px,transparent 1px),linear-gradient(90deg,#7394b411 1px,transparent 1px);background-size:37px 37px;mask-image:linear-gradient(to bottom,transparent,#000);pointer-events:none}.hero-visual svg{width:100%;height:420px;display:block}.micro-tag{position:absolute;font-size:11px;letter-spacing:.12em;font-weight:800;background:#0b1d35df;border:1px solid #4783aa9c;padding:9px 12px;border-radius:50px;color:#d8f9ff;backdrop-filter:blur(8px)}.micro-a{top:30px;right:20px}.micro-b{bottom:30px;left:20px}.pulse{animation:pulse 2.8s infinite;transform-origin:center}@keyframes pulse{50%{opacity:.32;transform:scale(.9)}}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px}.metric{background:#10213a;border:1px solid #2c4762;border-radius:19px;padding:20px 20px 17px}.metric strong{font-size:clamp(21px,3vw,35px);letter-spacing:-.07em;display:block;color:var(--mint);line-height:1.2}.metric span{font-weight:800;display:block;margin-top:5px;font-size:13px}.metric small{display:block;margin-top:7px;color:var(--soft);font-size:11px;line-height:1.4}.micro-note{font-size:12px;color:#91aabf;margin:13px 2px 0}
+.section{padding:93px 0 0;scroll-margin-top:25px}.head{display:flex;align-items:flex-start;justify-content:space-between;gap:28px;margin-bottom:28px}.kicker{color:var(--mint);font-weight:800;letter-spacing:.13em;font-size:11px;margin-bottom:10px;text-transform:uppercase}.section h2{font-size:clamp(26px,4vw,45px);line-height:1.15;letter-spacing:-.055em;margin:0}.head p{color:var(--soft);max-width:360px;font-size:14px;margin:4px 0 0}.card{background:linear-gradient(145deg,#15243e,#0e1d32);border:1px solid #31506c;border-radius:var(--r)}.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.info-btn{padding:24px;text-align:left;color:var(--white);min-height:205px;transition:.2s;border:1px solid #31506c;background:linear-gradient(145deg,#13263f,#0d1a30);border-radius:20px}.info-btn:hover,.info-btn.active{transform:translateY(-3px);border-color:var(--mint);background:#193b49}.info-btn strong{font-size:17px;display:block;margin:11px 0 5px}.info-btn p{margin:0;color:#bdd0dd;font-size:13px}.info-btn .symbol{font-size:30px;display:block;color:var(--mint);line-height:1}.details{border-left:3px solid var(--mint);background:#112c3c;border-radius:0 14px 14px 0;padding:16px 20px;margin-top:14px;color:#d2eff4;font-size:14px;min-height:72px}.details b{color:#fff}
+.comparison{padding:20px;background:#0c1a30;border:1px solid #31506c;border-radius:25px}.compare-top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:18px}.compare-top small{color:var(--soft)}.seg{display:inline-flex;gap:4px;background:#061325;border:1px solid #304c68;border-radius:100px;padding:5px}.seg button{border:0;color:#c0d3e1;padding:9px 23px;border-radius:100px;background:transparent;font-weight:800;font-size:13px}.seg button.active{color:#06222b;background:var(--mint)}.comp-table{display:grid;grid-template-columns:1.05fr 1fr 1fr;gap:1px;overflow:hidden;border-radius:16px;background:#2a4460}.comp-table>div{padding:17px;background:#10233c;font-size:13px}.comp-table .th{background:#17324e;color:#fff;font-weight:800}.comp-table .highlight{background:#193d49;color:#dffff5}.comp-table .label{color:#b8cadd;font-weight:700}.comp-table div span{display:block;font-size:11px;color:var(--soft);margin-top:3px}.comp-foot{color:#a9c0d0;font-size:12px;margin:14px 3px 0}
+.use-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.use{padding:24px;position:relative;min-height:192px;overflow:hidden}.use .icon{display:inline-grid;place-items:center;width:49px;height:49px;border-radius:15px;background:#153c4b;color:var(--mint);font-size:25px}.use h3{font-size:18px;line-height:1.2;margin:18px 0 8px}.use p{margin:0;color:var(--soft);font-size:13px}.use .corner{position:absolute;right:-28px;top:-39px;border:1px solid #315b70;border-radius:100%;width:130px;height:130px}
+.lab{border:1px solid #426c79;background:linear-gradient(140deg,#0e2a3c,#0d2134 62%,#172444);border-radius:29px;overflow:hidden;box-shadow:0 20px 80px #05101d70}.lab-top{display:flex;align-items:center;gap:10px;justify-content:space-between;padding:20px 25px;border-bottom:1px solid #335a6a}.lab-top b{font-size:13px}.state-pill{background:#163f3c;border:1px solid #397a73;border-radius:100px;padding:7px 12px;font-size:11px;color:#bbf6de;font-weight:800}.lab-inside{display:grid;grid-template-columns:1.17fr .83fr}.farm{border-right:1px solid #2e596c;position:relative;overflow:hidden;background:linear-gradient(#102b48,#163f47)}.farm svg{display:block;width:100%;height:370px}.water{opacity:0;transition:opacity .35s}.farm.irrigating .water{opacity:1}.farm.irrigating .drops{animation:drizzle .75s linear infinite}@keyframes drizzle{from{transform:translateY(-8px);opacity:.85}to{transform:translateY(29px);opacity:.1}}.farm .farm-caption{position:absolute;left:20px;bottom:18px;background:#08192bdf;border:1px solid #326276;border-radius:12px;padding:11px 13px;font-size:11px;color:#d7eaf8}.controls{padding:26px 28px 22px;display:flex;flex-direction:column;justify-content:center}.controls .lab-label{font-size:11px;letter-spacing:.12em;color:var(--soft);font-weight:800;text-transform:uppercase}.big-humidity{display:flex;align-items:baseline;gap:8px;margin-top:8px}.big-humidity strong{font-size:62px;line-height:1;letter-spacing:-.075em;color:var(--mint)}.big-humidity small{font-size:13px;color:var(--soft)}.range{width:100%;accent-color:var(--mint);margin:27px 0 7px;cursor:pointer}.ends{display:flex;justify-content:space-between;color:#a9c0cf;font-size:11px}.presets{display:flex;gap:7px;flex-wrap:wrap;margin:22px 0 20px}.preset{border:1px solid #476777;background:transparent;color:#d0e9ef;padding:8px 10px;border-radius:9px;font-size:11px;font-weight:800}.preset:hover{border-color:var(--mint)}.preset.active{background:#245b59;color:white;border-color:#61e6c2}.decision{border:1px solid #356c68;border-radius:17px;padding:17px;background:#123931}.decision.no{background:#1c3047;border-color:#466582}.decision small{font-size:11px;color:#c3d5d8;text-transform:uppercase;letter-spacing:.1em;font-weight:800}.decision strong{display:block;margin-top:4px;font-size:20px}.decision p{font-size:12px;color:#cadde0;margin:6px 0 0}.workflow{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:14px 0 0}.step{background:#11243b;border:1px solid #2e4d68;border-radius:15px;padding:18px 16px;min-height:132px}.step span{width:25px;height:25px;border-radius:50%;background:#204b53;color:var(--mint);display:grid;place-items:center;font-size:11px;font-weight:900;margin-bottom:13px}.step strong{display:block;font-size:14px}.step small{display:block;color:var(--soft);font-size:11px;margin-top:5px}.reality{margin-top:18px;border-left:3px solid var(--yellow);border-radius:0 15px 15px 0;background:#1e3041;padding:19px 21px;color:#d8e6ef;font-size:13px}.reality strong{color:var(--yellow)}.reality a{white-space:nowrap}
+.pipeline{display:flex;gap:10px;align-items:stretch;flex-wrap:wrap}.pipe{flex:1 1 155px;border:1px solid #344e6a;background:#12253e;padding:23px 18px;border-radius:17px}.pipe b{font-size:16px;display:block}.pipe span{font-size:12px;color:var(--soft);display:block;margin-top:8px}.pipe .num{font-size:26px;color:var(--mint);display:block;margin-bottom:13px}.challenges{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.challenge{padding:20px 23px}.challenge b{font-size:15px}.challenge p{margin:8px 0 0;color:var(--soft);font-size:12px}.question{padding:22px;border:1px solid #31516e;background:#102038;border-radius:19px;margin-bottom:12px}.question h3{font-size:17px;line-height:1.35;margin:0 0 16px}.answers{display:flex;gap:8px;flex-wrap:wrap}.answers button{border:1px solid #466581;background:#152a43;color:#e6f5ff;padding:10px 16px;border-radius:10px;font-size:12px;font-weight:750}.answers button:hover{background:#255169}.answers button.chosen{border-color:var(--mint);background:#24584f}.feedback{font-size:12px;color:var(--mint);margin:13px 0 0;min-height:0}.feedback:empty{display:none}
+.footer{margin-top:96px;padding:35px 0 70px;border-top:1px solid #29465f}.footer-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:24px}.footer h2{margin:0 0 10px;font-size:25px;letter-spacing:-.05em}.footer p{font-size:13px;color:var(--soft);max-width:470px}.sources{display:flex;flex-direction:column;gap:6px}.sources a{font-size:12px;color:#b9e9ee;text-decoration:none}.sources a:hover{text-decoration:underline;color:white}.postscript{padding-top:30px;color:#7f9bb5;font-size:11px}.reveal{opacity:1;transform:none}.reveal.visible{opacity:1;transform:none}
+@media(max-width:760px){.wrap{width:min(100% - 30px,660px)}.topbar{height:74px}.top-link{font-size:11px;padding:9px 12px}.hero{grid-template-columns:1fr;padding:52px 0 35px}.hero h1{font-size:110px}.hero-visual{min-height:275px}.hero-visual svg{height:275px}.metrics{grid-template-columns:1fr 1fr}.metrics .metric:last-child{grid-column:1/-1}.head{display:block}.head p{margin-top:14px;max-width:550px}.info-grid,.use-grid,.challenges{grid-template-columns:1fr 1fr}.info-grid>*:last-child,.use-grid>*:last-child{grid-column:1/-1}.lab-inside{grid-template-columns:1fr}.farm{border-right:0;border-bottom:1px solid #34576a}.controls{padding:24px}.workflow{grid-template-columns:repeat(2,1fr)}.comp-table>div{padding:12px;font-size:12px}}
+@media(max-width:510px){.brand small{font-size:9px}.top-link{font-size:10px}.hero h1{font-size:99px}.hero-visual{min-height:260px}.hero-visual svg{height:260px}.metrics,.info-grid,.use-grid,.challenges{grid-template-columns:1fr}.metrics .metric:last-child,.info-grid>*:last-child,.use-grid>*:last-child{grid-column:auto}.metric{padding:16px}.metrics .metric strong{font-size:28px}.info-btn{min-height:auto}.section{padding-top:73px}.comp-table{grid-template-columns:1fr 1fr 1fr}.comp-table>div{font-size:11px;padding:10px 7px}.compare-top{align-items:flex-start;flex-direction:column}.farm svg{height:290px}.workflow{gap:8px}.step{min-height:140px;padding:14px}.footer-grid{grid-template-columns:1fr}.pipe{flex-basis:calc(50% - 10px)}.hero p{font-size:14px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}.reveal{opacity:1;transform:none}}
+
+/* REDE VIVA 2.0 — escultura digital e animações com GSAP */
+:root{--mint:#52f1c7;--cyan:#62cfff;--purple:#a18dff;--bg:#050e1e;--line:#233b55}
+body{background:#050d1b}
+.wrap{width:min(1130px,calc(100% - 52px))}
+.topbar{position:relative;z-index:4}
+.brand-icon{box-shadow:inset 0 0 16px #42f9c414,0 0 21px #48ecc720}
+.nav-actions{display:flex;align-items:center;gap:22px}.nav-small{color:#94b1c8;font-size:10px;letter-spacing:.13em;text-decoration:none;font-weight:800}.nav-small:hover{color:#68f1d1}
+.hero{padding:87px 0 55px;gap:34px;grid-template-columns:1fr 1.04fr}
+.hero-visual{height:485px;min-height:485px;background:radial-gradient(ellipse 48% 53% at 50% 51%,#1b5272a0,#0c2041 60%,#080f25 100%);border-color:#416487;box-shadow:0 0 0 1px #213a5a66,0 30px 90px #0009,inset 0 0 65px #020b1be3}
+.hero-visual:after{z-index:0;opacity:.5}
+.hero-visual .network-canvas{position:absolute;inset:0;z-index:1;width:100%;height:100%;display:block;cursor:grab;touch-action:pan-y}
+.network-canvas:active{cursor:grabbing}
+.hero-visual .micro-tag{z-index:3}.micro-a{top:20px;left:22px;right:auto}.micro-b{right:18px;left:auto;bottom:56px;font-size:9px}
+.status-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#64ffbd;box-shadow:0 0 0 4px #51e8c219,0 0 13px #53f9c8;vertical-align:middle;margin-right:7px}
+.core-seal{pointer-events:none;position:absolute;inset:0;display:flex;z-index:2;align-items:center;justify-content:center;flex-direction:column;text-shadow:0 0 32px #3cfbe4aa}
+.core-seal strong{font-size:50px;line-height:1;font-weight:900;letter-spacing:-.075em;color:#d9fff7;text-shadow:0 0 36px #5afbd5a4,0 0 7px #aafbec99}
+.core-seal span{font-size:8px;letter-spacing:.29em;color:#cbf8f1;font-weight:800;margin-top:4px}
+.hero-visual-link{position:absolute;bottom:19px;left:24px;color:#cbfff1;font-weight:800;text-decoration:none;letter-spacing:.13em;font-size:10px;z-index:5}
+.hero-visual-link span{color:var(--mint);font-size:16px;margin-left:5px}
+.corner-bracket{position:absolute;z-index:2;width:30px;height:30px;pointer-events:none}.cb-tl{left:10px;top:10px;border-left:2px solid #60ffe1;border-top:2px solid #60ffe1}.cb-br{right:10px;bottom:10px;border-right:2px solid #60ffe1;border-bottom:2px solid #60ffe1}
+.visual-scan{position:absolute;inset:0;background:linear-gradient(transparent 49.8%,#65fff208 50%,transparent 50.2%);background-size:100% 8px;pointer-events:none;z-index:2}
+.hero h1{font-size:clamp(95px,14vw,190px);filter:drop-shadow(0 12px 25px #0f6f9a4d)}
+.hero h2{font-size:clamp(33px,4vw,54px)}
+.eyebrow{font-size:10px}
+.metric{position:relative;overflow:hidden;box-shadow:0 16px 24px #00000020}
+.metric:after{content:'';position:absolute;inset:auto 0 0;height:2px;background:linear-gradient(90deg,transparent,#54f6cb66,transparent)}
+.accent-gradient{background:linear-gradient(95deg,#65f3d4,#70b9fd,#b8a2ff);color:transparent;background-clip:text}
+.net-section .head{margin-bottom:28px}
+.network-experience{display:grid;grid-template-columns:1.5fr .83fr;border:1px solid #31516f;border-radius:28px;overflow:hidden;background:#09182b;box-shadow:0 35px 110px #0206119a}
+.network-stage{position:relative;min-height:510px;overflow:hidden;background:radial-gradient(ellipse at 50% 43%,#1146679c 0%,#0e2848 37%,#07172e 68%,#071327 100%)}
+.network-stage:before{content:'';position:absolute;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(#72a8cb14 1px,transparent 1px),linear-gradient(90deg,#72a8cb14 1px,transparent 1px);background-size:45px 45px;mask-image:radial-gradient(ellipse at center,#000 25%,transparent 75%)}
+.network-stage .network-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab;touch-action:pan-y}
+.network-stage .network-canvas:active{cursor:grabbing}
+.stage-badge{position:absolute;z-index:2;left:28px;top:26px;font-size:10px;font-weight:850;letter-spacing:.16em;color:#c9fff3;pointer-events:none}
+.stage-bottom{position:absolute;left:27px;right:27px;bottom:20px;display:flex;justify-content:space-between;gap:14px;color:#8fb8ce;font-weight:800;letter-spacing:.1em;font-size:9px;z-index:2;pointer-events:none}
+.stage-vignette{position:absolute;inset:0;background:linear-gradient(#06112800 74%,#071427a1);pointer-events:none}
+.stage-axes{position:absolute;right:30px;top:30px;color:#7ac8dd8a;font-size:11px;display:flex;gap:10px}
+.stage-axes span{display:grid;place-items:center;width:25px;height:25px;border:1px solid #4180a144;border-radius:50%}
+.network-console{display:flex;flex-direction:column;padding:27px 25px 24px;background:linear-gradient(148deg,#122942,#0e1b32 65%,#0a1c33);border-left:1px solid #31526b;min-width:0}
+.console-top{display:flex;justify-content:space-between;gap:8px;color:#99b9cf;font-size:10px;font-weight:850;letter-spacing:.12em}
+.console-index{white-space:nowrap;color:#66e9ce}
+.mode-selector{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;border:1px solid #395c73;background:#08192e;padding:5px;border-radius:11px;margin-top:20px}
+.mode-btn{border:0;background:transparent;color:#adc9d9;font-weight:850;padding:11px 5px;border-radius:8px;font-size:13px;transition:background .2s}
+.mode-btn.active{background:#52f1c7;color:#0b2330;box-shadow:0 4px 21px #52f1c71d}
+.console-kicker{font-size:10px;letter-spacing:.16em;color:var(--mint);font-weight:850;margin-top:28px}
+.network-mode-content h3{margin:9px 0 10px;font-size:clamp(22px,2.6vw,29px);line-height:1.13;letter-spacing:-.045em}
+.network-mode-content p{font-size:12px;color:#b4cedd;line-height:1.67;min-height:78px;margin:0}
+.console-readout{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:23px 0 0}
+.console-readout div{border:1px solid #31516a;padding:12px 13px;border-radius:12px;background:#091c31;min-width:0}
+.console-readout span{display:block;font-size:9px;line-height:1.4;letter-spacing:.1em;color:#8badc2;font-weight:800;min-height:25px}
+.console-readout strong{display:block;font-size:23px;letter-spacing:-.04em;color:#e9fff9}
+.signal-visual{height:30px;display:flex;align-items:center;gap:4px;margin:13px 0 16px;justify-content:space-between;overflow:hidden}
+.signal-visual i{width:3px;height:8px;background:linear-gradient(#62f8d4,#397dbb);border-radius:10px;opacity:.8;transform-origin:bottom}
+.signal-visual i:nth-child(4n){height:18px}.signal-visual i:nth-child(6n){height:26px}.signal-visual i:nth-child(3n){height:12px}
+.console-actions{display:flex;gap:8px;margin-top:auto}
+.transmit-btn{border:0;flex:1;background:var(--mint);color:#082d30;padding:12px 10px;border-radius:11px;font-weight:850;font-size:11px;letter-spacing:-.015em;white-space:nowrap}
+.transmit-btn:hover{background:#a7ffec}.transmit-btn:disabled{opacity:.65;cursor:wait}
+.pause-btn{border:1px solid #38617a;color:#d7f6fa;background:#112b43;border-radius:11px;padding:10px 12px;font-size:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;min-width:65px}
+.pause-btn span{font-size:9px;color:#9ebacb}
+.console-footnote{font-size:10px;color:#83a8bb;margin:17px 0 0;line-height:1.5}
+.packet-trace{margin-top:13px;border-radius:20px;border:1px solid #31516b;background:#0c1f36;padding:22px 24px}
+.trace-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.trace-head strong{font-size:14px}.trace-head span{font-size:11px;color:#9ab6c9;text-align:right}
+.trace-steps{display:grid;grid-template-columns:1fr .36fr 1fr .36fr 1fr .36fr 1fr;align-items:center;gap:0;margin-top:18px}
+.trace-step{display:flex;align-items:center;flex-direction:column;gap:4px;opacity:.64;transition:opacity .2s,transform .2s;white-space:nowrap}
+.trace-step .trace-icon{border:1px solid #46718a;background:#14334b;color:#6be7d6;width:42px;height:42px;display:grid;place-items:center;border-radius:13px;font-size:23px}
+.trace-step b{font-size:12px}.trace-step small{font-size:10px;color:#8eacbc}
+.trace-step.route-active{opacity:1;transform:translateY(-4px)}.trace-step.route-active .trace-icon{background:#226654;border-color:#6fffd7;box-shadow:0 0 25px #59f4bc45}
+.trace-link{height:2px;position:relative;background:#34596e;margin:-18px 3px 0;overflow:visible}
+.trace-link:after{content:'';position:absolute;right:-2px;top:-3px;border-top:4px solid transparent;border-bottom:4px solid transparent;border-left:5px solid #5c899e}
+.trace-dot{width:9px;height:9px;position:absolute;top:-4px;left:0;border-radius:50%;background:#8cffe5;box-shadow:0 0 16px #5cffd1;opacity:0}
+.info-btn,.use,.challenge,.step,.metric{will-change:transform}
+@media(max-width:850px){.network-experience{grid-template-columns:1fr}.network-stage{min-height:470px}.network-console{border-left:0;border-top:1px solid #31526b;padding:24px}.network-mode-content p{min-height:0}.console-actions{margin-top:18px}.hero{grid-template-columns:1fr 1fr;gap:15px}.hero-visual{height:420px;min-height:420px}}
+@media(max-width:760px){.wrap{width:min(100% - 30px,660px)}.nav-small{display:none}.hero{grid-template-columns:1fr;gap:25px;padding-top:55px}.hero h1{font-size:clamp(95px,18vw,130px)}.hero-visual{height:440px;min-height:440px}.network-stage{min-height:420px}.network-console{padding:22px}.metric{padding:17px}.net-section .head{margin-bottom:19px}}
+@media(max-width:510px){.hero-visual{height:350px;min-height:350px}.micro-tag{font-size:9px;padding:7px 9px}.micro-b{display:none}.hero-visual-link{font-size:9px}.core-seal strong{font-size:40px}.network-stage{min-height:365px}.stage-bottom{left:15px;right:15px;font-size:8px;flex-direction:column;gap:2px}.stage-badge{left:16px;top:20px;font-size:9px}.stage-axes{right:16px;top:20px}.network-console{padding:20px}.network-mode-content h3{font-size:24px}.packet-trace{padding:18px 10px}.trace-head{display:block;padding:0 7px}.trace-head span{display:block;text-align:left;margin-top:5px}.trace-step .trace-icon{width:32px;height:32px;border-radius:10px;font-size:17px}.trace-step b{font-size:10px}.trace-step small{font-size:8px}.trace-link{margin:-17px 0 0}.console-actions{flex-wrap:wrap}.transmit-btn{font-size:11px}.console-readout span{font-size:8px}}
+@media(prefers-reduced-motion:reduce){.network-canvas{opacity:.95}.info-btn,.trace-step{transition:none!important}}
+
+/* ── REDE VIVA // EDIÇÃO MINERAL ── */
+.tower-stage svg.tower-fallback{height:86%;width:86%;display:block}
+:root{--bg:#070d1b;--bg2:#0c162b;--panel:#101d32;--panel2:#152540;--line:#314564;--white:#f6f8ff;--soft:#a8b8d0;--mint:#7dd3fc;--cyan:#60baff;--purple:#b59bff;--yellow:#f2c598;--red:#ff8eab;--r:24px}
+html{scroll-padding-top:30px}body{font-family:"DM Sans","Segoe UI",Arial,sans-serif;background:#070d1b}body::before{background:radial-gradient(ellipse 56% 35% at 75% 4%,#1a3163aa,transparent),radial-gradient(ellipse 40% 23% at 5% 32%,#30264f6b,transparent),linear-gradient(160deg,#070d1b,#0b1225 60%,#080d1a)}
+h1,h2,h3,.brand strong,.metric strong,.network-mode-content h3{font-family:"Space Grotesk",Arial,sans-serif}
+a{color:var(--cyan)}
+.wrap{width:min(1190px,calc(100% - 60px))}
+.top-line{height:2px;background:linear-gradient(90deg,#4988ff,#7ed9fa,#ad80e6,#ff94ba)}
+.reading-bar{height:2px;background:#d3a0ff;box-shadow:0 0 20px #cc98ff}
+.topbar{height:90px;border-bottom-color:#9ab2d52c}.brand-icon{background:linear-gradient(145deg,#192c50,#121e35);border-color:#6389c573;color:#a1dcff}.brand strong{letter-spacing:.14em;font-weight:800}.brand small{color:#8fa5c8}.top-link{border-color:#456089;color:#d2e9ff}.top-link:hover{background:#1c3455}.status-dot,.live-dot{background:#a1eeff;box-shadow:0 0 0 4px #5ca9ff21,0 0 13px #53d1ff}
+.hero-premium{padding:78px 0 68px;display:grid;grid-template-columns:.95fr 1.05fr;gap:45px;min-height:700px;align-items:center}
+.hero-copy{position:relative;z-index:3;padding:15px 0 15px 0}.hero-overline{font-size:11px;letter-spacing:.18em;color:#879ac0;font-weight:800;margin-top:38px}.eyebrow{font-size:10px;letter-spacing:.16em;color:#a3d8ff}.eyebrow::before{display:none}.live-dot{width:7px;height:7px;border-radius:50%;display:inline-block}.eyebrow-version{color:#7084a7;margin-left:5px}.hero-premium h1{font-size:clamp(115px,15vw,192px);background:linear-gradient(130deg,#fff 24%,#b7dfff 50%,#c6b2ff 80%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 18px 22px #5573cb40);margin:14px 0 25px;letter-spacing:-.095em;line-height:.82}.hero-period{font-size:.5em;vertical-align:top;letter-spacing:0;color:#a88bff;background:linear-gradient(#7fc7ff,#ba91ff);-webkit-background-clip:text;background-clip:text}
+.hero-premium h2{font-size:clamp(34px,3.9vw,56px);line-height:1.06;max-width:640px;letter-spacing:-.06em;font-weight:700;margin:0}.hero-premium h2 em{font-style:normal;color:#9bd6ff}.hero-premium p{font-size:15px;line-height:1.8;color:#a9bbd4;max-width:540px;margin:25px 0 30px}
+.hero-premium .main-btn{background:linear-gradient(110deg,#82cfff,#a5bcff);border:1px solid #c8e5ff44;box-shadow:0 10px 36px #428bff33;color:#071427;padding:15px 22px;font-size:12px}.hero-premium .main-btn:hover{background:#d2e9ff;color:#06162f;transform:translateY(-2px)}.hero-premium .ghost-btn{border:1px solid #435b81;padding:14px 20px;color:#e1eaff;font-size:12px}.hero-premium .ghost-btn:hover{background:#1c3151}.hero-data-note{margin-top:45px;font-size:11px;color:#7f96ba;display:flex;gap:12px;align-items:center}.mini-line{display:block;width:30px;height:1px;background:#729ecb}
+.tower-stage{height:615px;min-height:615px;position:relative;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse 60% 52% at 50% 41%,#1a3662 0%,#0e1c39 43%,#0a1226 71%,#080e1c 100%);border:1px solid #5571a27a;border-radius:34px;box-shadow:0 35px 120px #0009,inset 0 0 85px #1f438330;cursor:grab;touch-action:pan-y}
+.tower-stage:active{cursor:grabbing}.tower-stage:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(130deg,#a9dfff14,transparent 30%,transparent 75%,#997cff15);z-index:2}.tower-stage:after{content:"";position:absolute;inset:0;border:1px solid #ffffff12;border-radius:inherit;pointer-events:none;z-index:5}.tower-grid{position:absolute;inset:0;z-index:0;opacity:.24;background-image:linear-gradient(#89b8ff20 1px,transparent 1px),linear-gradient(90deg,#89b8ff20 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(transparent,#000 95%);pointer-events:none}.tower-aurora{position:absolute;inset:0;background:radial-gradient(circle at 60% 20%,#8156d020,transparent 44%),radial-gradient(circle at 42% 60%,#20b7ff18,transparent 45%);pointer-events:none}
+#towerCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;display:block;touch-action:pan-y;opacity:0;transition:opacity .8s ease}.tower-fallback{position:absolute;inset:7% 7% 8%;height:86%;width:86%;z-index:1;opacity:.95;pointer-events:none;filter:drop-shadow(0 0 27px #4bbcff35)}
+.tower-top-left{position:absolute;top:26px;left:25px;display:flex;align-items:center;gap:5px;font-size:10px;font-weight:800;letter-spacing:.15em;color:#d5edff;z-index:4}.tower-top-left small{margin-left:8px;color:#7292ba;letter-spacing:.11em;font-size:9px}.tower-axis{position:absolute;top:27px;right:23px;z-index:4;font-size:9px;color:#9cb3d3;letter-spacing:.13em;font-weight:700}.tower-axis span{display:inline-block;height:1px;width:15px;background:#a7bbe0;vertical-align:middle;margin:0 5px}
+.tower-floating-node{position:absolute;z-index:4;border:1px solid #6683b27d;background:#0c1b32d6;color:#d9f0ff;border-radius:11px;padding:10px 12px;display:flex;align-items:center;gap:8px;font-size:9px;letter-spacing:.07em;backdrop-filter:blur(12px);box-shadow:0 15px 36px #0004;pointer-events:none}.tower-floating-node span{font-size:15px;color:#90ceff}.tn-one{top:23%;left:4%}.tn-two{top:43%;right:4%}
+.tower-bottom-panel{position:absolute;bottom:20px;left:20px;right:20px;z-index:4;background:#071224c9;border:1px solid #6681a652;border-radius:17px;backdrop-filter:blur(14px);padding:15px 17px;display:flex;justify-content:space-between;align-items:center;gap:10px;box-shadow:0 14px 40px #0006}.tiny-label{display:block;font-size:9px;color:#7899bf;letter-spacing:.16em;font-weight:800;margin-bottom:4px}.tower-bottom-panel strong{font-size:14px;color:#eff6ff;letter-spacing:-.025em}.panel-slash{color:#9d86ff;margin:0 4px}.tower-quick-actions{display:flex;gap:7px}.tower-action{border:1px solid #455d7d;background:#16243e;color:#a9bedb;border-radius:9px;padding:9px 10px;font-size:11px;font-weight:800;white-space:nowrap}.tower-action:hover,.tower-action.active{background:#2a4874;color:#ebf6ff;border-color:#6ba9f1}.tower-action span{font-size:10px}
+.metrics .metric{background:linear-gradient(150deg,#111d33,#0c172b);border:1px solid #2a3f61;border-radius:21px;padding:24px;box-shadow:0 16px 40px #05091744}.metric strong{color:#9cdaff;font-size:clamp(24px,3vw,38px)}.metric:after{background:linear-gradient(90deg,#6ab6fb55,#b28cff66,transparent)}.metric span{color:#f3f6ff}
+.kicker{color:#94caff}.accent-gradient{background:linear-gradient(95deg,#8ddaff,#85b1ff,#ba96ff);-webkit-background-clip:text;background-clip:text;color:transparent}.section h2{letter-spacing:-.045em}.card,.info-btn,.comparison,.question,.challenge,.step,.pipe,.packet-trace{border-color:#314768;background-color:#101d32}.info-btn.active,.info-btn:hover{border-color:#85caff;background:#213a5a}.info-btn .symbol,.console-kicker{color:#95d8ff}.details{border-color:#83cfff;background:#152b43}
+.network-experience{border-color:#405777;background:#0b1529}.network-console{background:linear-gradient(145deg,#172640,#10192e);border-color:#405777}.mode-btn.active,.seg button.active,.transmit-btn{background:linear-gradient(120deg,#91d9ff,#b2c2ff);color:#0b1a30}.trace-step.route-active .trace-icon{background:#2b4c78;border-color:#9de2ff;box-shadow:0 0 23px #69bbff52}.trace-step .trace-icon{color:#9cd9ff}.signal-visual i{background:linear-gradient(#a0d7ff,#745cb9)}
+.lab{background:linear-gradient(145deg,#12283d,#0b192f 65%,#242244);border-color:#4e6387}.big-humidity strong,.step span{color:#9ddfff}.range{accent-color:#96d7ff}.decision{background:#183e52;border-color:#4f8294}.preset.active{border-color:#b0ccff;background:#294977}.comp-table .highlight{background:#203f5c}.footer{border-color:#3d4e6b}
+@media(max-width:1100px){.hero-premium{gap:20px;grid-template-columns:.93fr 1.07fr}.tower-stage{height:570px;min-height:570px}}
+@media(max-width:850px){.hero-premium{grid-template-columns:1fr 1fr;gap:14px}.tower-stage{height:520px;min-height:520px}.hero-premium h2{font-size:35px}.tn-two{right:2%}}
+@media(max-width:760px){.wrap{width:min(100% - 32px,670px)}.hero-premium{grid-template-columns:1fr;gap:29px;padding-top:45px}.hero-overline{margin-top:23px}.hero-premium h1{font-size:clamp(115px,22vw,165px)}.hero-premium h2{font-size:clamp(34px,8vw,52px)}.tower-stage{height:580px;min-height:580px}.hero-data-note{margin-top:25px}}
+@media(max-width:510px){.topbar{height:72px}.hero-premium{padding:38px 0 32px}.hero-premium h1{font-size:clamp(108px,27vw,152px);margin:15px 0 22px}.hero-premium h2{font-size:35px}.hero-premium p{font-size:14px;margin:19px 0 22px}.hero-premium .hero-buttons{flex-direction:column}.hero-premium .hero-buttons a{text-align:center}.hero-overline{letter-spacing:.12em;font-size:9px}.eyebrow-version{display:none}.tower-stage{height:475px;min-height:475px;border-radius:24px}.tower-top-left{font-size:9px;top:19px;left:16px}.tower-top-left small{font-size:8px}.tower-axis{display:none}.tower-floating-node{padding:7px;font-size:8px}.tn-one{top:26%;left:3%}.tn-two{top:48%;right:2%}.tower-bottom-panel{left:10px;right:10px;bottom:10px;padding:11px 12px}.tower-bottom-panel strong{font-size:11px}.tiny-label{font-size:7px}.tower-action{padding:6px 7px}.tower-action span{display:none}.tower-fallback{inset:6% 1% 7%;width:98%;height:87%}.hero-data-note{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.tower-stage,.tower-action,#towerCanvas{transition:none!important}.live-dot{animation:none!important}}
+
+
+/* ─── MINERAL / visual system refresh: restrained colors + bounded 3D ─── */
+:root{
+ --bg:#091411;--bg2:#0e1d19;--panel:#13241f;--panel2:#192d27;
+ --line:#375148;--white:#f5f1e7;--soft:#acbfb4;
+ --mint:#9dd0b1;--cyan:#c8dac5;--purple:#d7ab79;
+ --yellow:#d9af72;--red:#eab59c;--r:22px;
+}
+html{scroll-behavior:smooth}
+body{background:#091411;color:var(--white)}
+body::before{background:radial-gradient(ellipse 42% 26% at 78% 6%,#315b494c,transparent),radial-gradient(ellipse 42% 32% at 7% 34%,#534a3130,transparent),linear-gradient(150deg,#091411,#0d1b17 55%,#0b1513)}
+::selection{background:#a5cdb1;color:#0d2019}
+a{color:#b7ddc5}
+.top-line{background:linear-gradient(90deg,#a2c7ac,#e0b785,#779a86);height:2px}
+.reading-bar{background:#dfb77b;box-shadow:0 0 12px #b7936c55}
+.topbar{border-bottom:1px solid #52716644}
+.brand-icon{background:#22372e;border-color:#80ad9570;color:#f2e7d5;box-shadow:none}
+.brand small{color:#a5baae}.brand strong{color:#f4ede2}
+.top-link,.ghost-btn{border-color:#597368;color:#e5eadd}
+.top-link:hover,.ghost-btn:hover{background:#233a31;color:#fff}
+.nav-small{color:#a7b7a9}.nav-small:hover{color:#e9ca9a}
+.hero-premium{padding:54px 0 42px;min-height:0;grid-template-columns:1.03fr .97fr;gap:52px;align-items:center}
+.hero-copy{padding:12px 0}
+.hero-overline{margin-top:32px;color:#aabbab;letter-spacing:.16em}
+.eyebrow{color:#c4cdbb}.eyebrow-version{display:none}
+.live-dot,.status-dot{background:#d3b383;box-shadow:0 0 0 4px #d3b38320,0 0 10px #d3b3834b}
+.hero-premium h1{font-size:clamp(105px,12vw,158px);background:linear-gradient(130deg,#fffdfa 15%,#f0e7d8 56%,#a9c7ad 94%);-webkit-background-clip:text;background-clip:text;filter:none;letter-spacing:-.08em;margin:14px 0 23px}
+.hero-period{background:linear-gradient(#dcb67d,#c5a06a);-webkit-background-clip:text;background-clip:text}
+.hero-premium h2{font-weight:700;font-size:clamp(34px,3.7vw,53px);line-height:1.09;letter-spacing:-.055em}
+.hero-premium h2 em{color:#b4d7bd}
+.hero-premium p{color:#b8c5b6;line-height:1.72;margin:24px 0 25px}
+.hero-premium .main-btn{background:#e0ba80;color:#17261e;border:1px solid #e5c99c;box-shadow:0 10px 25px #050a081f}
+.hero-premium .main-btn:hover{background:#f1d4aa;color:#11271e}
+.hero-premium .ghost-btn{border-color:#657d6f;color:#f0ede5}
+.hero-data-note{color:#a0b4a9;margin-top:32px}.mini-line{background:#c5ae88}
+/* Stage is deliberately smaller, with a 3D camera framing the tower above the HUD. */
+.tower-stage{height:480px;min-height:480px;border-radius:27px;border:1px solid #5a77684c;
+ background:radial-gradient(ellipse 67% 59% at 52% 39%,#2d5545 0%,#1a3029 42%,#0c1c18 80%,#081411 100%);
+ box-shadow:0 29px 70px #01070577,inset 0 0 60px #395a4030;}
+.tower-stage:before{background:linear-gradient(130deg,#f8e2b512,transparent 43%,transparent 78%,#98cfa613)}
+.tower-stage:after{border-color:#f8f1e711}
+.tower-grid{background-image:linear-gradient(#b6d0b70a 1px,transparent 1px),linear-gradient(90deg,#b6d0b70a 1px,transparent 1px);opacity:.62;mask-image:linear-gradient(transparent,#000 95%)}
+.tower-aurora{background:radial-gradient(circle at 55% 23%,#d9b68213,transparent 50%),radial-gradient(circle at 42% 55%,#7eae9912,transparent 51%)}
+.tower-fallback{inset:9% 13% 18%;width:74%!important;height:73%!important;object-fit:contain;filter:drop-shadow(0 0 14px #a6c2ac36)}
+.tower-stage svg.tower-fallback{width:74%!important;height:73%!important}
+.tower-top-left{top:21px;left:21px;font-size:9px;color:#f0eee1;letter-spacing:.13em}
+.tower-top-left small{color:#91b2a1}
+.tower-axis{top:23px;right:21px;color:#b2c7b9}
+.tower-axis span{background:#b7b9aa}
+.tower-floating-node{border-color:#57766675;background:#152820cb;color:#e5e6d8;border-radius:9px;padding:8px 10px;box-shadow:0 12px 26px #0109062e}
+.tower-floating-node span{color:#d6b57e}.tn-one{top:27%;left:4%}.tn-two{top:46%;right:4%}
+.tower-bottom-panel{bottom:14px;left:14px;right:14px;padding:11px 14px;border:1px solid #55746677;border-radius:13px;background:#10231ddc;box-shadow:0 12px 24px #020a0640}
+.tower-bottom-panel strong{color:#f7f2e6;font-size:12px}.tiny-label{color:#a0b7a9;font-size:8px}
+.panel-slash{color:#cba16e}
+.tower-action{border:1px solid #5b776a;background:#1a332b;color:#d4dfd3;border-radius:8px;padding:7px 9px}
+.tower-action.active,.tower-action:hover{background:#456954;border-color:#9dc5a5;color:#fff}
+.metrics .metric{background:linear-gradient(150deg,#192b24,#13231d);border-color:#4b66563e;box-shadow:0 11px 29px #0005}
+.metric strong,.big-humidity strong{color:#d9bf90}.metric:after{background:linear-gradient(90deg,#759f85,#d5b687,transparent)}
+.metric span{color:#f4ede2}.micro-note{color:#a9b9ad}
+.kicker,.console-kicker{color:#cba978}.section h2{letter-spacing:-.038em}
+.accent-gradient{background:linear-gradient(100deg,#b2d3b8,#e6c494);-webkit-background-clip:text;background-clip:text}
+.card,.info-btn,.comparison,.question,.challenge,.step,.pipe,.packet-trace{background:#142720;border-color:#476355}
+.info-btn{background:linear-gradient(160deg,#192f26,#14251f)}
+.info-btn.active,.info-btn:hover{border-color:#b3c9af;background:#27483a;transform:translateY(-2px)}
+.info-btn .symbol{color:#deb981}.info-btn p,.head p{color:#b3c5b8}
+.details{background:#1a352a;border-color:#d7b681;color:#e9ebdf}
+.comparison{background:#11231c}.comp-table{background:#536456}
+.comp-table>div{background:#172d25;color:#e8eade}.comp-table .th{background:#274338}
+.comp-table .highlight{background:#2e4d3d;color:#f3eee1}.comp-table .label{color:#c5cebf}
+.seg{background:#0c1b16;border-color:#456553}.seg button{color:#d4dacf}.seg button.active{background:#dabc8b;color:#1b2b21}
+.use .icon{background:#2e4d3c;color:#dfc08b}.use .corner{border-color:#557a6155}
+.lab{background:linear-gradient(140deg,#1b372c,#11251e 72%,#27352b);border-color:#5674617b;box-shadow:0 20px 60px #0005}
+.lab-top{border-color:#52726166}.state-pill{background:#274c3d;border-color:#608873;color:#dbf0d9}
+.farm{border-color:#577361}.farm .farm-caption{border-color:#597d66}
+.range{accent-color:#cca46e}.preset{border-color:#627b67;color:#e3e5d8}
+.preset.active{border-color:#dfc494;background:#526743}.decision{background:#2a523f;border-color:#789f78}
+.decision.no{background:#283d35;border-color:#5a7365}.step span{color:#e1c18c}
+.network-experience{background:#0f1e19;border-color:#55766688;box-shadow:0 26px 75px #01060480}
+.network-stage{background:radial-gradient(ellipse at 50% 43%,#305d4990 0%,#1a3c2e 38%,#11261e 73%,#0d1b16 100%)}
+.network-stage:before{background-image:linear-gradient(#bbd6b416 1px,transparent 1px),linear-gradient(90deg,#bbd6b416 1px,transparent 1px)}
+.stage-badge{color:#e9efe3}.stage-bottom{color:#adc2af}.stage-axes{color:#a0c7a7}
+.network-console{background:linear-gradient(150deg,#1b3329,#11251e);border-color:#4d6958}
+.console-top{color:#bec9b6}.console-index{color:#d6b780}
+.mode-selector{background:#0e2018;border-color:#4d6c56}
+.mode-btn{color:#b8cdb9}.mode-btn.active{background:#d7b785;color:#1c3024;box-shadow:none}
+.network-mode-content p{color:#c0cbbd}
+.console-readout div{background:#10241b;border-color:#43624b}
+.console-readout span{color:#aebfae}.console-readout strong{color:#eaeada}
+.signal-visual i{background:linear-gradient(#b5d8b3,#b99a6a)}
+.transmit-btn{background:#ddb881;color:#1c2c20}.transmit-btn:hover{background:#edce9e;color:#172920}
+.pause-btn{background:#213e30;border-color:#567565;color:#efe9d8}
+.pause-btn span{color:#b7cabb}.console-footnote{color:#a0b8a6}
+.packet-trace{background:#122820}.trace-head span{color:#b7c9b5}
+.trace-step .trace-icon{background:#203c2f;border-color:#6a9279;color:#e5c18a}
+.trace-step.route-active .trace-icon{background:#42644b;border-color:#d6b785;box-shadow:0 0 20px #cda46a3b}
+.trace-step small{color:#b9c4b3}.trace-link{background:#55735e}
+.footer{border-color:#59726277}
+@media(max-width:1100px){.hero-premium{gap:28px}.tower-stage{height:450px;min-height:450px}}
+@media(max-width:850px){.hero-premium{gap:20px}.tower-stage{height:425px;min-height:425px}.hero-premium h2{font-size:35px}}
+@media(max-width:760px){.hero-premium{grid-template-columns:1fr;gap:28px;padding-top:38px}.tower-stage{height:470px;min-height:470px}.hero-overline{margin-top:20px}.hero-premium h1{font-size:clamp(108px,23vw,154px)}}
+@media(max-width:510px){.wrap{width:min(100% - 32px,670px)}.topbar{height:70px}.hero-premium{padding:30px 0 28px;gap:23px}.hero-premium h1{font-size:clamp(100px,25vw,138px)}.hero-premium h2{font-size:clamp(31px,8.3vw,38px)}.hero-premium p{font-size:14px}.tower-stage{height:400px;min-height:400px;border-radius:20px}.tower-top-left{top:15px;left:13px;font-size:8px}.tower-top-left small{font-size:7px}.tower-floating-node{padding:6px 7px;font-size:7px}.tn-one{top:27%;left:2%}.tn-two{top:48%;right:2%}.tower-bottom-panel{left:8px;right:8px;bottom:8px;padding:9px 9px}.tower-bottom-panel strong{font-size:10px}.tiny-label{font-size:7px}.tower-action{padding:6px}.tower-stage svg.tower-fallback{width:73%!important;height:70%!important;inset:10% 13% 20%}.hero-data-note{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.tower-stage,.tower-action,#towerCanvas{transition:none!important}}
+
+
+/* 2026-11-10 / REDE VIVA 5G — BRANCO, PRETO, LARANJA */
+:root{
+  --bg:#fbfaf8;--bg2:#f3f0eb;--panel:#ffffff;--panel2:#f4f1ed;
+  --line:#e5e0d9;--white:#171717;--soft:#696866;
+  --mint:#ee7228;--cyan:#f18a3c;--purple:#242424;
+  --yellow:#ef762c;--red:#cc5d35;--r:20px;
+  --orange:#ee7228;--orange-deep:#ce4f10;--ink:#171717;--muted:#6e6b67;
+}
+html{scroll-padding-top:28px}
+body{background:#fbfaf8;color:#171717;line-height:1.58}
+body::before{background:radial-gradient(ellipse 40% 20% at 91% 2%,#f0b78121,transparent 76%),radial-gradient(ellipse 45% 20% at 2% 39%,#e6d4c31c,transparent 80%);opacity:.9}
+::selection{background:#f9bc89;color:#1b1715}
+a{color:#c45415}a:hover{color:#a33a00}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+.wrap{width:min(1160px,calc(100% - 56px))}
+.top-line{height:3px;background:#ed7228}
+.reading-bar{height:3px;background:#191919;box-shadow:none}
+.topbar{border-bottom:1px solid #e7e2da;height:83px}
+.brand{color:#181818}.brand strong{color:#171717;letter-spacing:.09em}.brand small{color:#807b75}
+.brand-icon{color:#fff;background:#ed7228;border-color:#ed7228;box-shadow:none;border-radius:13px;font-size:21px}
+.nav-small{color:#5f5b58}.nav-small:hover{color:#c75815}
+.top-link{border:1px solid #232323;color:#202020;background:transparent;border-radius:100px}
+.top-link:hover{background:#202020;border-color:#202020;color:white}
+.hero-premium{grid-template-columns:1.01fr .99fr;gap:40px;padding:58px 0 39px;min-height:0}
+.hero-overline{margin-top:26px;color:#75716d;letter-spacing:.135em}
+.hero-copy{padding:10px 0}
+.eyebrow{color:#be521a;letter-spacing:.13em}.live-dot,.status-dot{background:#ee7228;box-shadow:0 0 0 4px #f5752a1e,0 0 10px #ee722850}
+.hero-premium h1{font-size:clamp(105px,12vw,154px);background:none;color:#181818;filter:none;letter-spacing:-.092em;margin:17px 0 23px;line-height:.82}
+.hero-premium .hero-period{background:none;color:#ef772d;-webkit-text-fill-color:#ef772d}
+.hero-premium h2{font-size:clamp(35px,4vw,52px);font-weight:700;line-height:1.12;letter-spacing:-.055em;color:#171717}
+.hero-premium h2 em{color:#d65a19}
+.hero-premium p{color:#67635e;line-height:1.72;margin:20px 0 25px;max-width:480px}
+.hero-premium .main-btn,.main-btn{background:#ef762b;color:#fff;border:1px solid #ef762b;border-radius:11px;box-shadow:0 8px 20px #e76e251a;font-size:13px;padding:14px 20px}
+.hero-premium .main-btn:hover,.main-btn:hover{background:#cf5310;border-color:#cf5310;color:#fff;transform:translateY(-1px)}
+.hero-premium .ghost-btn,.ghost-btn{border:1px solid #d3ccc2;color:#242424;background:white;border-radius:11px;padding:14px 18px}
+.hero-premium .ghost-btn:hover,.ghost-btn:hover{background:#f4eee9;color:#202020}
+.hero-data-note{margin-top:30px;color:#8a8179;font-size:11px}.mini-line{background:#e97125;width:24px}
+/* Torre: área delimitada, sem recortes e com espaço para os controles */
+.tower-stage{height:465px!important;min-height:465px!important;max-height:465px;border-radius:25px;border:1px solid #e4ddd3;background:radial-gradient(ellipse 64% 48% at 52% 37%,#fce0c7 0%,#f6efe7 46%,#ece9e5 90%);box-shadow:0 20px 53px #24201c13,inset 0 1px 1px #fff;overflow:hidden}
+.tower-stage:before{background:linear-gradient(140deg,#ffffff55,transparent 36%,transparent 74%,#f8b17a10)}
+.tower-stage:after{border-color:#ffffffbd}
+.tower-grid{opacity:.7;background-image:linear-gradient(#8f7f6d13 1px,transparent 1px),linear-gradient(90deg,#8f7f6d13 1px,transparent 1px);background-size:35px 35px}
+.tower-aurora{background:radial-gradient(circle at 48% 30%,#f38d4032,transparent 48%)}
+.tower-stage svg.tower-fallback{inset:9% 16% 23%;width:68%!important;height:68%!important;filter:drop-shadow(0 8px 12px #81716536)}
+.tower-top-left{top:19px;left:20px;color:#292724;letter-spacing:.11em}
+.tower-top-left small,.tower-axis{color:#888179}.tower-axis span{background:#a9a29b}
+.tower-floating-node{background:#fffffff0;border:1px solid #ddd3c7;color:#272320;box-shadow:0 7px 25px #28211a0d;border-radius:9px;backdrop-filter:blur(9px)}
+.tower-floating-node span{color:#de6520}.tn-one{top:27%;left:3%}.tn-two{top:44%;right:3%}
+.tower-bottom-panel{bottom:12px;left:12px;right:12px;padding:11px 14px;background:#fffdfbf5;border:1px solid #dfd5ca;box-shadow:0 6px 21px #281c1514;border-radius:12px}
+.tower-bottom-panel strong{color:#272321;font-size:12px}.tiny-label{color:#897f77}.panel-slash{color:#e4722e}
+.tower-action{background:#f6f2ed;border:1px solid #ded5cb;color:#38312b;border-radius:8px}
+.tower-action.active,.tower-action:hover{background:#ef742b;color:white;border-color:#ef742b}
+.metrics{gap:13px;margin-top:10px}
+.metrics .metric,.metric{background:#fff;border:1px solid #e9e2da;box-shadow:0 7px 24px #20170e08;border-radius:19px;padding:24px}
+.metrics .metric strong{color:#e46b20}.metric span{color:#1c1c1c}.metric small{color:#756f6a}.metric:after{background:#ef762b;height:2px;width:36px;left:24px;right:auto}
+.micro-note{color:#817a73;font-size:11px}
+.section{padding-top:91px}.kicker,.console-kicker{color:#d45a18}.section h2{color:#191919}
+.head p{color:#6f6c68}.accent-gradient{background:none;color:#e46c21;-webkit-text-fill-color:#e46c21}
+.card,.info-btn,.comparison,.question,.challenge,.step,.pipe,.packet-trace{background:#fff;border:1px solid #e8e1d9;box-shadow:0 7px 21px #28160c07;color:#171717}
+.info-btn{background:white;color:#171717;border-radius:17px;transition:transform .2s,background .2s,border-color .2s}
+.info-btn.active,.info-btn:hover{border-color:#ed762e;background:#fff8f2;transform:translateY(-2px)}
+.info-btn strong,.use h3,.pipe b,.challenge b,.step strong{color:#1e1d1c}
+.info-btn .symbol{color:#ed772d}.info-btn p,.head p,.use p,.challenge p,.step small,.pipe span{color:#716b65}
+.details{background:#fff4ea;border-left:3px solid #ed7228;color:#4f4139;box-shadow:none}.details b{color:#181818}
+.comparison{background:white}.compare-top small,.comp-foot{color:#77716a}
+.seg{background:#f1ece6;border-color:#e7ddd4}.seg button{color:#59524d}.seg button.active{background:#242424;color:#fff}
+.comp-table{background:#eae2da;border:1px solid #e9e1d8}
+.comp-table>div{background:#fff;color:#2d2b29}.comp-table .th{background:#f4f0ec;color:#252525}
+.comp-table .label{color:#68625d;background:#faf8f5}.comp-table .highlight{background:#fff0e4;color:#ad4410}
+.use .icon{background:#fff0e2;color:#e97026}.use .corner{border-color:#e7d7cb}
+/* Explorer: contrast sculpture on black, controls on white */
+.network-experience{background:#fff;border:1px solid #e7e0d7;box-shadow:0 18px 43px #1d171015;border-radius:24px}
+.network-stage{background:radial-gradient(ellipse at 50% 46%,#3d271b 0%,#211c1a 39%,#111112 100%)}
+.network-stage:before{background-image:linear-gradient(#f8b47e14 1px,transparent 1px),linear-gradient(90deg,#f8b47e14 1px,transparent 1px)}
+.stage-badge{color:#fff1e5}.stage-bottom{color:#b5aca4}.stage-axes{color:#d1b59e}.stage-axes span{border-color:#b8a19050}
+.stage-vignette{background:linear-gradient(transparent 69%,#151210a8)}
+.network-console{background:#fff;border-left:1px solid #ebe3da;color:#171717}
+.console-top{color:#6d665f}.console-index{color:#d85f1a}
+.mode-selector{background:#f1eee9;border:1px solid #e5ded4}.mode-btn{color:#5b554f}.mode-btn.active{background:#242424;color:#fff;box-shadow:none}
+.network-mode-content h3{color:#1b1b1b}.network-mode-content p{color:#6e6965}
+.console-readout div{background:#f8f5f1;border-color:#e7dfd6}
+.console-readout span{color:#7a7169}.console-readout strong{color:#1b1b1b}
+.signal-visual i{background:linear-gradient(#fc9b51,#bd4e16)}
+.transmit-btn{background:#ef742b;color:#fff;border:0}.transmit-btn:hover{background:#c84f12;color:#fff}
+.pause-btn{background:#f6f2ed;border-color:#dfd6ca;color:#312a27}.pause-btn span{color:#716a64}
+.console-footnote{color:#80776e}
+.packet-trace{background:#fff}.trace-head span{color:#716b65}.trace-step .trace-icon{background:#fff2e7;border-color:#edd5c3;color:#df6821}
+.trace-step.route-active .trace-icon{background:#ef7529;border-color:#ef7529;color:#fff;box-shadow:0 0 0 4px #ef752922}
+.trace-link{background:#dacfc3}.trace-link:after{border-left-color:#c6b4a6}.trace-dot{background:#ed7127;box-shadow:0 0 10px #f16e2290}
+.trace-step small{color:#776f66}
+/* Irrigation and process area */
+.lab{background:#fff;border:1px solid #e6ded5;box-shadow:0 15px 43px #1d171012;border-radius:24px}
+.lab-top{background:#fff;border-bottom:1px solid #ece4dc;color:#202020}
+.state-pill{background:#fff0e1;border:1px solid #f1d0b5;color:#bf4d0d}
+.farm{border-right-color:#e9e0d7}.farm .farm-caption{background:#181a1bdb;border-color:#454545;color:white}
+.controls{background:#fff;color:#171717}.controls .lab-label,.big-humidity small{color:#736d67}.big-humidity strong{color:#e56a21}
+.range{accent-color:#e96d22}.ends{color:#77716a}
+.preset{background:#fff;color:#514940;border-color:#d9d0c7}.preset:hover{border-color:#e9772d}.preset.active{background:#ef762b;color:#fff;border-color:#ef762b}
+.decision{background:#fff1e4;border-color:#f0cbaa;color:#1c1a18}.decision.no{background:#f7f5f1;border-color:#ded6cf}
+.decision small{color:#905029}.decision strong{color:#9c3b0f}.decision.no strong{color:#242424}.decision p{color:#684e41}.decision.no p{color:#6e6862}
+.step{background:#fff}.step span{background:#fff0e3;color:#cf5718}
+.reality{background:#fff2e5;border-color:#ef752a;color:#51453d}.reality strong{color:#a83f0e}.reality a{color:#b44a0d}
+.pipe{background:#fff}.pipe .num{color:#e96b21}
+.question{background:#fff}.question h3{color:#191919}
+.answers button{background:#f9f6f2;border-color:#ded5cc;color:#2c2926}.answers button:hover{background:#ffead8}
+.answers button.chosen{border-color:#e7732d;background:#fff1e6;color:#b7470e}
+.feedback{color:#a54812}
+.footer{border-top:1px solid #e6ded6}.footer h2{color:#1a1a1a}.footer p{color:#746e69}
+.sources a{color:#bc4c0d}.sources a:hover{color:#8e3205}.postscript{color:#827a72}
+@media(max-width:1100px){.hero-premium{gap:28px}.tower-stage{height:445px!important;min-height:445px!important;max-height:445px}}
+@media(max-width:850px){.hero-premium{gap:20px}.tower-stage{height:432px!important;min-height:432px!important;max-height:432px}.network-console{border-left:0;border-top:1px solid #ebe3da}}
+@media(max-width:760px){.wrap{width:min(100% - 34px,680px)}.hero-premium{grid-template-columns:1fr;gap:22px;padding-top:41px}.tower-stage{height:440px!important;min-height:440px!important;max-height:440px}.hero-premium h1{font-size:clamp(108px,24vw,150px)}.section{padding-top:72px}}
+@media(max-width:510px){.wrap{width:min(100% - 28px,670px)}.hero-premium{padding-top:31px;gap:20px}.hero-premium h1{font-size:clamp(102px,26vw,136px)}.hero-premium h2{font-size:clamp(31px,8vw,38px)}.tower-stage{height:390px!important;min-height:390px!important;max-height:390px;border-radius:18px}.tower-top-left{top:13px;left:12px}.tower-floating-node{font-size:7px;padding:6px}.tower-bottom-panel{bottom:8px;left:8px;right:8px;padding:9px}.tower-bottom-panel strong{font-size:10px}.tower-stage svg.tower-fallback{inset:9% 17% 24%;width:66%!important;height:67%!important}.metrics .metric{padding:18px}.metric:after{left:18px}.footer{margin-top:70px}}
+@media(prefers-reduced-motion:reduce){.tower-stage{transition:none!important}}
+
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="top-line"></div><div class="reading-bar" id="readingBar" aria-hidden="true"></div>
+<div class="wrap">
+<header class="topbar"><a class="brand" href="#inicio"><span class="brand-icon" aria-hidden="true">◉</span><span><strong>REDE VIVA</strong><small>INFOGRÁFICO INTERATIVO</small></span></a><div class="nav-actions"><a class="nav-small" href="#arquitetura">ESCULTURA 3D</a><a class="top-link" href="#laboratorio">TESTAR A IoT ↘</a></div></header>
+<main id="inicio">
+<section class="hero hero-premium" id="inicio">
+<div class="hero-copy">
+  <span class="eyebrow"><span class="live-dot"></span> INFOGRÁFICO INTERATIVO</span>
+  <div class="hero-overline">REDES MÓVEIS E INTERNET DAS COISAS</div>
+  <h1>5G<span class="hero-period">.</span></h1>
+  <h2>Entenda o 5G, da <em>antena ao sensor.</em></h2>
+  <p>Veja como o 5G conecta dispositivos e como a IoT pode apoiar decisões na agricultura e na indústria.</p>
+  <div class="hero-buttons"><a class="main-btn" href="#arquitetura">Explorar a rede <span aria-hidden="true">↗</span></a><a class="ghost-btn" href="#laboratorio">Experimentar IoT <span aria-hidden="true">⌁</span></a></div>
+  <div class="hero-data-note"><span class="mini-line"></span> Conteúdo baseado em referências da Anatel, UIT, GSMA e NIST.</div>
+</div>
+<div class="tower-stage hero-visual" id="towerStage" aria-label="Visualização interativa tridimensional de uma torre de telecomunicações 5G">
+  <div class="tower-grid" aria-hidden="true"></div>
+  <div class="tower-aurora" aria-hidden="true"></div>
+  <svg id="towerFallback" class="tower-fallback" viewBox="0 0 438 540" role="img" aria-label="Ilustração da torre de telecomunicações com antenas e ondas de sinal"><defs><linearGradient id="towersteel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#eef0ee"/><stop offset=".5" stop-color="#818886"/><stop offset="1" stop-color="#2c3434"/></linearGradient><linearGradient id="towerbg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ed8b40"/><stop offset="1" stop-color="#ffb074"/></linearGradient><filter id="bl"><feGaussianBlur stdDeviation="6"/></filter></defs><g fill="none" stroke="#f28232" opacity=".45"><ellipse cx="219" cy="138" rx="157" ry="39"/><ellipse cx="219" cy="139" rx="118" ry="29"/><ellipse cx="219" cy="139" rx="76" ry="18"/></g><ellipse cx="219" cy="505" rx="156" ry="23" fill="#d77430" opacity=".11" filter="url(#bl)"/><g stroke="url(#towersteel)" stroke-width="6" stroke-linecap="round"><path d="M203 118 L135 475 M235 118 L303 475 M211 118 L303 475 M227 118 L135 475"/></g><g fill="none" stroke="#858e8c" stroke-width="3" opacity=".8"><line x1="189.4" y1="170" x2="255.5" y2="200"/><line x1="248.6" y1="170" x2="182.5" y2="200"/><line x1="189.4" y1="170" x2="248.6" y2="170"/><line x1="182.5" y1="200" x2="262.3" y2="230"/><line x1="255.5" y1="200" x2="175.7" y2="230"/><line x1="182.5" y1="200" x2="255.5" y2="200"/><line x1="175.7" y1="230" x2="269.1" y2="260"/><line x1="262.3" y1="230" x2="168.9" y2="260"/><line x1="175.7" y1="230" x2="262.3" y2="230"/><line x1="168.9" y1="260" x2="275.9" y2="290"/><line x1="269.1" y1="260" x2="162.1" y2="290"/><line x1="168.9" y1="260" x2="269.1" y2="260"/><line x1="162.1" y1="290" x2="282.8" y2="320"/><line x1="275.9" y1="290" x2="155.2" y2="320"/><line x1="162.1" y1="290" x2="275.9" y2="290"/><line x1="155.2" y1="320" x2="289.6" y2="350"/><line x1="282.8" y1="320" x2="148.4" y2="350"/><line x1="155.2" y1="320" x2="282.8" y2="320"/><line x1="148.4" y1="350" x2="296.4" y2="380"/><line x1="289.6" y1="350" x2="141.6" y2="380"/><line x1="148.4" y1="350" x2="289.6" y2="350"/><line x1="141.6" y1="380" x2="303.2" y2="410"/><line x1="296.4" y1="380" x2="134.8" y2="410"/><line x1="141.6" y1="380" x2="296.4" y2="380"/><line x1="134.8" y1="410" x2="310.0" y2="440"/><line x1="303.2" y1="410" x2="128.0" y2="440"/><line x1="134.8" y1="410" x2="303.2" y2="410"/><line x1="128.0" y1="440" x2="316.9" y2="470"/><line x1="310.0" y1="440" x2="121.1" y2="470"/><line x1="128.0" y1="440" x2="310.0" y2="440"/></g><g><rect x="211" y="52" width="16" height="89" rx="4" fill="url(#towersteel)"/><rect x="178" y="109" width="16" height="100" rx="4" fill="#f5f5f3"/><rect x="244" y="109" width="16" height="100" rx="4" fill="#f5f5f3"/><rect x="202" y="114" width="34" height="120" rx="5" fill="#777f7b"/><rect x="204" y="119" width="30" height="110" rx="4" fill="#dde0da"/><circle cx="219" cy="45" r="6" fill="#f77a2b"/><circle cx="219" cy="45" r="13" fill="#f77a2b" opacity=".4" filter="url(#bl)"/></g><rect x="164" y="268" width="110" height="62" rx="9" fill="#202426" stroke="#f58230" stroke-width="2"/><text x="219" y="310" text-anchor="middle" font-family="Arial,sans-serif" font-weight="900" font-size="36" fill="#fff7ed">5G</text><g stroke="#ec7c37" stroke-width="2" fill="none" opacity=".5"><path d="M68 495 H370 M96 509 H343"/></g></svg>
+  <canvas id="towerCanvas" aria-label="Torre 3D com antenas setoriais, estrutura metálica e ondas representando conectividade. Arraste para girar." role="img"></canvas>
+  <div class="tower-top-left"><span class="status-dot"></span> <span>TORRE 5G</span> <small>MODELO 3D</small></div>
+  <div class="tower-axis" aria-hidden="true">Nº 01 <span></span> RÁDIO / ANTENA</div>
+  <div class="tower-floating-node tn-one" aria-hidden="true"><span>↗</span><b>ALTA CAPACIDADE</b></div>
+  <div class="tower-floating-node tn-two" aria-hidden="true"><span>◎</span><b>BAIXA LATÊNCIA*</b></div>
+  <div class="tower-bottom-panel">
+    <div><span class="tiny-label">TORRE DE TELECOMUNICAÇÕES</span><strong>Torre 5G <span class="panel-slash">/</span> modelo conceitual</strong></div>
+    <div class="tower-quick-actions"><button class="tower-action active" id="signalToggle" type="button" aria-pressed="true" title="Ativar ou pausar a animação de ondas">◉ <span>Sinal</span></button><button class="tower-action" id="towerViewToggle" type="button" aria-pressed="false" title="Alternar ângulo de observação">⌗ <span>Visão técnica</span></button></div>
+  </div>
+</div>
+</section>
+<div class="metrics" aria-label="Metas técnicas de referência do 5G"><div class="metric"><strong>20 Gbit/s</strong><span>Velocidade de pico</span><small>Meta teórica de download em condições específicas.</small></div><div class="metric"><strong>1 ms</strong><span>Latência de referência</span><small>Meta de interface de rádio para cenário URLLC.</small></div><div class="metric"><strong>1 milhão</strong><span>Dispositivos por km²</span><small>Capacidade de referência para cenários de IoT massiva.</small></div></div><p class="micro-note">Fonte: UIT/IMT-2020. São referências técnicas, não garantias da conexão cotidiana.</p>
+<section id="arquitetura" class="section net-section reveal">
+<div class="head"><div><div class="kicker">00 / Escultura digital interativa</div><h2>A rede ganhou <span class="accent-gradient">forma.</span></h2></div><p>Explore uma escultura de conexões em movimento. Arraste para girar a estrutura e envie um pacote de dados pelo sistema.</p></div>
+<div class="network-experience">
+  <div class="network-stage" id="networkStage">
+    <div class="stage-axes" aria-hidden="true"><span>Y</span><span>X</span></div>
+    <canvas id="explorerNet" class="network-canvas" role="img" aria-label="Escultura tridimensional artística: nós conectados por linhas com pulsos de dados em movimento. Arraste com o mouse ou toque para girar."></canvas>
+    <div class="stage-badge"><span class="status-dot"></span> REDE DE DISPOSITIVOS</div>
+    <div class="stage-bottom"><span>MODELO CONCEITUAL / NÃO REPRESENTA MEDIÇÕES REAIS</span><span>GIRE PARA EXPLORAR ◇</span></div>
+    <div class="stage-vignette" aria-hidden="true"></div>
+  </div>
+  <aside class="network-console">
+   <div class="console-top"><span>EXPLORADOR DE TOPOLOGIA</span><span class="console-index">[ 01 / 03 ]</span></div>
+   <div class="mode-selector" role="group" aria-label="Modo da visualização de rede">
+     <button type="button" class="mode-btn" data-network-mode="4g" aria-pressed="false">4G</button>
+     <button type="button" class="mode-btn active" data-network-mode="5g" aria-pressed="true">5G</button>
+     <button type="button" class="mode-btn" data-network-mode="iot" aria-pressed="false">IoT</button>
+   </div>
+   <div class="network-mode-content" role="status" aria-live="polite">
+     <div class="console-kicker" id="modeKicker">MAIOR CAPACIDADE</div>
+     <h3 id="modeTitle">Conexões para diferentes necessidades.</h3>
+     <p id="modeDescription">O 5G foi projetado para suportar muitos dispositivos e serviços diversos, da banda larga à comunicação entre máquinas.</p>
+   </div>
+   <div class="console-readout"><div><span>CENA DE NÓS ILUSTRADOS</span><strong id="nodeCounter">84</strong></div><div><span>ANIMAÇÃO</span><strong id="networkState">ATIVO</strong></div></div>
+   <div class="signal-visual" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+   <div class="console-actions"><button type="button" class="transmit-btn" id="transmitBtn"><span>◉</span> Enviar pacote de dados <span aria-hidden="true">↗</span></button><button type="button" class="pause-btn" id="pauseNetBtn" aria-pressed="false" title="Pausar ou retomar animação">Ⅱ <span>Pausar</span></button></div>
+   <p class="console-footnote">Os nós e pulsos são representações visuais. Não correspondem a números medidos em redes 4G ou 5G.</p>
+  </aside>
+</div>
+<div class="packet-trace" aria-label="Percurso ilustrativo de um pacote de dados">
+  <div class="trace-head"><strong>Rota de um dado</strong><span id="packetStatus" aria-live="polite">Clique em “Enviar pacote de dados” para acompanhar a transmissão.</span></div>
+  <div class="trace-steps" id="traceSteps">
+   <div class="trace-step"><span class="trace-icon">◈</span><b>Sensor</b><small>Coleta</small></div>
+   <div class="trace-link"><span class="trace-dot"></span></div>
+   <div class="trace-step"><span class="trace-icon">⌁</span><b>Rede</b><small>Transmite</small></div>
+   <div class="trace-link"><span class="trace-dot"></span></div>
+   <div class="trace-step"><span class="trace-icon">⬡</span><b>Análise</b><small>Interpreta</small></div>
+   <div class="trace-link"><span class="trace-dot"></span></div>
+   <div class="trace-step"><span class="trace-icon">✦</span><b>Ação</b><small>Automatiza</small></div>
+  </div>
+</div>
+</section>
+<section id="fundamentos" class="section reveal"><div class="head"><div><div class="kicker">01 / Conceito</div><h2>O que torna o 5G diferente?</h2></div><p>Mais do que navegar rapidamente: a arquitetura foi pensada para tipos distintos de conexão.</p></div><div class="info-grid" role="group" aria-label="Explore os três perfis do 5G"><button class="info-btn active" data-profile="embb"><span class="symbol">↗</span><strong>Alta velocidade</strong><p>eMBB · Banda larga aprimorada para transmitir grandes volumes de dados.</p></button><button class="info-btn" data-profile="urllc"><span class="symbol">◷</span><strong>Baixa latência</strong><p>URLLC · Comunicação rápida e confiável para aplicações críticas.</p></button><button class="info-btn" data-profile="mmtc"><span class="symbol">⟁</span><strong>Muitos dispositivos</strong><p>mMTC · Suporte a grandes redes de sensores e equipamentos.</p></button></div><div id="profileDetail" class="details" role="status" aria-live="polite"><b>eMBB:</b> favorece vídeos de alta resolução, realidade aumentada e outras aplicações que precisam transportar muitos dados.</div></section>
+<section id="comparacao" class="section reveal"><div class="head"><div><div class="kicker">02 / Comparativo</div><h2>4G × 5G</h2></div><p>Selecione uma geração para destacar sua coluna e entender o avanço sem exageros.</p></div><div class="comparison"><div class="compare-top"><small>Comparação de características típicas e capacidades técnicas</small><div class="seg" role="group" aria-label="Destacar geração"><button class="active" data-gen="5g" aria-pressed="true">5G</button><button data-gen="4g" aria-pressed="false">4G</button></div></div><div class="comp-table" id="compTable" role="table" aria-label="Diferenças entre 4G e 5G"><div class="th" role="columnheader">Critério</div><div class="th col4" role="columnheader">4G</div><div class="th col5 highlight" role="columnheader">5G</div><div class="label">Velocidade</div><div class="col4">Alta para internet móvel</div><div class="col5 highlight">Potencialmente muito maior</div><div class="label">Latência</div><div class="col4">Geralmente mais elevada</div><div class="col5 highlight">Pode ser menor</div><div class="label">Dispositivos IoT</div><div class="col4">Também suporta sensores</div><div class="col5 highlight">Projetado para maior densidade</div><div class="label">Usos principais</div><div class="col4">Celulares, apps e streaming</div><div class="col5 highlight">Banda larga, IoT e automação</div></div><p class="comp-foot">O 4G também conecta objetos e pode operar junto com o 5G. Resultados dependem de cobertura, implementação e equipamentos.</p></div></section>
+<section class="section reveal"><div class="head"><div><div class="kicker">03 / Aplicações</div><h2>Onde a IoT é utilizada?</h2></div><p>Objetos físicos coletam e enviam dados para serviços que monitoram ou controlam processos.</p></div><div class="use-grid"><article class="use card"><span class="corner"></span><span class="icon">♧</span><h3>Agricultura inteligente</h3><p>Sensores acompanham a lavoura para orientar o uso de água e recursos.</p></article><article class="use card"><span class="corner"></span><span class="icon">⚙</span><h3>Indústria conectada</h3><p>Máquinas enviam dados para manutenção preditiva e controle de qualidade.</p></article><article class="use card"><span class="corner"></span><span class="icon">⌁</span><h3>Serviços inteligentes</h3><p>Monitoramento remoto em saúde, trânsito, energia e edifícios.</p></article></div></section>
+<section id="laboratorio" class="section reveal"><div class="head"><div><div class="kicker">04 / Experiência interativa</div><h2>Irrigação orientada por sensores.</h2></div><p>Altere a umidade do solo e observe uma simulação didática de IoT, conectividade, análise e irrigação.</p></div>
+<div class="lab"><div class="lab-top"><b>SIMULADOR · IRRIGAÇÃO INTELIGENTE</b><span id="labTag" class="state-pill">● DEMONSTRAÇÃO</span></div><div class="lab-inside"><div id="farm" class="farm"><svg viewBox="0 0 650 370" role="img" aria-label="Ilustração de plantação, sensores, antena e irrigador"><defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#153a58"/><stop offset="1" stop-color="#28717c"/></linearGradient><linearGradient id="soil" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#376954"/><stop offset="1" stop-color="#244337"/></linearGradient></defs><rect width="650" height="370" fill="url(#sky)"/><circle cx="525" cy="67" r="41" fill="#f6d693" opacity=".78"/><path d="M0 230L125 155L245 212L375 132L520 205L650 145V370H0Z" fill="#254e5b"/><path d="M0 250Q180 215 350 253T650 246V370H0Z" fill="url(#soil)"/><path d="M0 311L650 270M0 356L650 306M40 370L650 330" fill="none" stroke="#77ab71" stroke-width="7" opacity=".4"/><g stroke="#5ede91" stroke-width="5" stroke-linecap="round" fill="none"><path d="M83 314v-57m0 30q-26-30-32-22m32 12q24-28 34-26"/><path d="M176 322v-73m0 38q-20-28-29-26m29 20q19-28 28-28"/><path d="M269 309v-66m0 31q-25-26-33-23m33 27q22-27 30-24"/><path d="M373 315v-64m0 30q-24-30-35-28m35 25q26-29 35-28"/><path d="M484 313v-69m0 38q-22-30-34-27m34 29q28-27 33-29"/><path d="M573 322v-70m0 31q-20-25-28-26m28 21q22-29 33-27"/></g><g fill="#79e4a0"><ellipse cx="65" cy="279" rx="18" ry="9" transform="rotate(20 65 279)"/><ellipse cx="99" cy="267" rx="17" ry="9" transform="rotate(-24 99 267)"/><ellipse cx="164" cy="273" rx="16" ry="8" transform="rotate(22 164 273)"/><ellipse cx="185" cy="267" rx="17" ry="8" transform="rotate(-25 185 267)"/><ellipse cx="256" cy="269" rx="17" ry="9" transform="rotate(20 256 269)"/><ellipse cx="285" cy="269" rx="17" ry="9" transform="rotate(-22 285 269)"/><ellipse cx="470" cy="269" rx="18" ry="9" transform="rotate(20 470 269)"/><ellipse cx="498" cy="267" rx="17" ry="9" transform="rotate(-26 498 267)"/></g><g stroke="#c1e8e6" stroke-width="5" fill="none" stroke-linecap="round"><path d="M516 218l0-86M507 132h18M509 218h15"/><path d="M503 125q13-11 26 0M495 116q20-21 42 0"/></g><g fill="#112a41" stroke="#68e1d6" stroke-width="3"><rect x="116" y="206" width="49" height="39" rx="7"/><rect x="405" y="195" width="48" height="34" rx="7"/></g><g stroke="#90fbe9" stroke-width="3" stroke-linecap="round"><path d="M129 218q11-10 22 0M134 225q7-7 12 0" fill="none"/><path d="M420 208h19M420 216h13"/></g><path d="M335 226v-95" stroke="#e3f9f1" stroke-width="7"/><path d="M325 131h21" stroke="#e3f9f1" stroke-width="9" stroke-linecap="round"/><g class="water" fill="#62d8ff"><g class="drops"><circle cx="330" cy="145" r="3"/><circle cx="314" cy="170" r="3"/><circle cx="291" cy="199" r="4"/><circle cx="267" cy="230" r="3"/><circle cx="357" cy="162" r="3"/><circle cx="382" cy="193" r="4"/><circle cx="410" cy="221" r="3"/><circle cx="306" cy="213" r="3"/><circle cx="363" cy="225" r="3"/></g><path d="M338 129Q284 145 248 223M338 129Q390 157 424 227M336 129L330 235" fill="none" stroke="#5dd6ff" stroke-width="3" stroke-dasharray="7 9" opacity=".7"/></g><rect x="18" y="20" rx="12" width="162" height="37" fill="#07192bcf" stroke="#56958e"/><circle cx="39" cy="38" r="5" fill="#61e6c2"/><text x="52" y="43" fill="#e7f9ee" font-size="13" font-family="Arial" font-weight="bold">SENSORES ATIVOS</text></svg><div class="farm-caption">PAINEL ILUSTRATIVO · NÃO HÁ SENSORES REAIS CONECTADOS</div></div><div class="controls"><span class="lab-label">Leitura simulada do sensor</span><div class="big-humidity"><strong id="humidityValue">22%</strong><small>umidade do solo</small></div><label for="humidity" class="lab-label" style="margin-top:24px;letter-spacing:0;text-transform:none">Arraste para alterar a leitura:</label><input class="range" type="range" min="0" max="100" step="1" value="22" id="humidity" aria-label="Umidade do solo, porcentagem"><div class="ends"><span>0% · solo muito seco</span><span>100% · saturado</span></div><div class="presets" aria-label="Cenários de umidade"><button class="preset active" data-hum="22">Solo seco</button><button class="preset" data-hum="55">Solo adequado</button><button class="preset" data-hum="82">Solo úmido</button></div><div class="decision" id="decision"><small>Decisão automatizada</small><strong id="decisionTitle">Irrigação ativada ✓</strong><p id="decisionText">O solo está abaixo do limite didático. O controlador liga a irrigação.</p></div></div></div></div>
+<div class="workflow"><div class="step"><span>01</span><strong>Sensor IoT</strong><small>Mede umidade e gera dados.</small></div><div class="step"><span>02</span><strong>Rede móvel</strong><small>Transmite dados; 5G pode ampliar a conectividade.</small></div><div class="step"><span>03</span><strong>Análise</strong><small>Software ou IA avalia as condições.</small></div><div class="step"><span>04</span><strong>Automação</strong><small>Aciona ou interrompe a irrigação.</small></div></div>
+<div class="reality"><strong>Aplicação real documentada:</strong> a Embrapa apresentou, em 2024, um dispositivo com inteligência artificial que avalia o estresse hídrico das plantas a partir de parâmetros como temperatura das folhas e pode acionar a irrigação automaticamente. <a href="https://www.embrapa.br/busca-de-noticias/-/noticia/91651368/inteligencia-artificial-analisa-temperatura-das-folhas-para-identificar-necessidade-de-agua?link=agencia" target="_blank" rel="noopener noreferrer">Consultar a Embrapa ↗</a><br><br><b>Distinção importante:</b> a simulação acima usa umidade do solo e um limite didático hipotético de 35%, não reproduz os parâmetros do dispositivo da Embrapa. O uso de 5G é uma possibilidade de conexão, não um recurso confirmado desse dispositivo; sistemas semelhantes também podem usar 4G, Wi-Fi ou outras redes.</div>
+</section>
+<section class="section reveal"><div class="head"><div><div class="kicker">05 / Integração tecnológica</div><h2>5G + IoT + IA + automação</h2></div><p>Cada tecnologia tem um papel diferente na transformação dos dados em ações.</p></div><div class="pipeline"><div class="pipe"><span class="num">01</span><b>IoT</b><span>O sensor mede e coleta.</span></div><div class="pipe"><span class="num">02</span><b>5G</b><span>É uma das redes que pode transportar os dados.</span></div><div class="pipe"><span class="num">03</span><b>IA</b><span>Identifica padrões e apoia decisões.</span></div><div class="pipe"><span class="num">04</span><b>Automação</b><span>Executa uma ação segundo a lógica do sistema.</span></div></div><p class="micro-note">Nem toda automação usa IA, nem toda IoT precisa de 5G.</p></section>
+<section class="section reveal"><div class="head"><div><div class="kicker">06 / Limites e cuidados</div><h2>Limitações e desafios do 5G.</h2></div><p>O funcionamento depende da infraestrutura e das necessidades reais de cada aplicação.</p></div><div class="challenges"><div class="challenge card"><b>◉ Cobertura</b><p>Áreas rurais e remotas ainda podem ter acesso limitado.</p></div><div class="challenge card"><b>◉ Custo</b><p>Antenas, equipamentos e atualização de sistemas exigem investimento.</p></div><div class="challenge card"><b>◉ Segurança</b><p>Mais objetos conectados exigem proteção de dados e controle de acesso.</p></div><div class="challenge card"><b>◉ Compatibilidade</b><p>Não basta haver 5G: aparelhos e sistemas precisam ser compatíveis.</p></div><div class="challenge card"><b>◉ Qualificação</b><p>Equipes precisam conhecer redes, sensores e automação.</p></div><div class="challenge card"><b>◉ Uso adequado</b><p>Em muitos casos, 4G, Wi-Fi, NB-IoT ou outras redes já atendem bem.</p></div></div></section>
+<section class="section reveal" id="quiz"><div class="head"><div><div class="kicker">07 / Verifique o aprendizado</div><h2>Confira o que aprendeu</h2></div><p>Teste o que aprendeu clicando nas respostas.</p></div><div class="question"><h3>1. Toda aplicação de IoT precisa de uma rede 5G?</h3><div class="answers"><button data-q="1" data-correct="false">Sim, obrigatoriamente</button><button data-q="1" data-correct="true">Não, existem outras redes</button></div><p class="feedback" id="fb1" role="status" aria-live="polite"></p></div><div class="question"><h3>2. O valor de 1 ms é garantido em qualquer conexão 5G?</h3><div class="answers"><button data-q="2" data-correct="true">Não, é uma meta para cenário específico</button><button data-q="2" data-correct="false">Sim, para todas as redes</button></div><p class="feedback" id="fb2" role="status" aria-live="polite"></p></div></section>
+</main>
+<footer class="footer" id="fontes"><div class="footer-grid"><div><div class="kicker">Fontes e verificação</div><h2>Referências e notas técnicas</h2><p>Os conteúdos foram baseados em referências técnicas e institucionais. Os dados de desempenho do 5G são metas de referência; a irrigação do painel é uma simulação educativa.</p></div><div class="sources"><a target="_blank" rel="noopener noreferrer" href="https://www.gov.br/anatel/pt-br/assuntos/5G/perguntas-e-respostas">01 · Anatel — Perguntas e respostas sobre 5G ↗</a><a target="_blank" rel="noopener noreferrer" href="https://www.itu.int/en/mediacentre/backgrounders/Pages/5G-fifth-generation-of-mobile-technologies.aspx">02 · UIT — 5G / IMT-2020 ↗</a><a target="_blank" rel="noopener noreferrer" href="https://www.gsma.com/solutions-and-impact/technologies/internet-of-things/5giot/">03 · GSMA — 5G e Internet das Coisas ↗</a><a target="_blank" rel="noopener noreferrer" href="https://www.gov.br/agricultura/pt-br/assuntos/inovacao/agrohub-brasil/produtores-rurais/exemplos-de-tecnologias-aplicadas/Exemplos%20de%20Tecnologias%20aplicadas">04 · Ministério da Agricultura — Tecnologias aplicadas ↗</a><a target="_blank" rel="noopener noreferrer" href="https://www.embrapa.br/busca-de-noticias/-/noticia/91651368/inteligencia-artificial-analisa-temperatura-das-folhas-para-identificar-necessidade-de-agua?link=agencia">05 · Embrapa — IA para irrigação (2024) ↗</a><a target="_blank" rel="noopener noreferrer" href="https://www.nist.gov/publications/5g-network-security-design-principles-applying-5g-cybersecurity-and-privacy">06 · NIST — Segurança e privacidade do 5G ↗</a></div></div><div class="postscript">REDE VIVA · INFOGRÁFICO INTERATIVO · Revisado em novembro de 2026 · Documento educativo independente</div></footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script>
+(()=>{
+const $=id=>document.getElementById(id);
+const profiles={embb:'<b>eMBB:</b> favorece vídeos de alta resolução, realidade aumentada e outras aplicações que precisam transportar muitos dados.',urllc:'<b>URLLC:</b> destina-se a comunicações muito rápidas e confiáveis em cenários específicos. O desempenho depende da arquitetura implantada.',mmtc:'<b>mMTC:</b> busca conectar grandes quantidades de sensores e equipamentos, como medidores inteligentes em áreas extensas.'};
+document.querySelectorAll('[data-profile]').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('[data-profile]').forEach(b=>b.classList.toggle('active',b===btn));$('profileDetail').innerHTML=profiles[btn.dataset.profile]}));
+document.querySelectorAll('[data-gen]').forEach(btn=>btn.addEventListener('click',()=>{const v=btn.dataset.gen;document.querySelectorAll('[data-gen]').forEach(b=>{let active=b===btn;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))});document.querySelectorAll('.col4').forEach(el=>el.classList.toggle('highlight',v==='4g'));document.querySelectorAll('.col5').forEach(el=>el.classList.toggle('highlight',v==='5g'))}));
+const input=$('humidity');function update(){const n=Number(input.value);$('humidityValue').textContent=n+'%';const irrigate=n<35;$('farm').classList.toggle('irrigating',irrigate);$('decision').classList.toggle('no',!irrigate);$('decisionTitle').textContent=irrigate?'Irrigação ativada ✓':'Irrigação desligada';$('decisionText').textContent=irrigate?'O solo está abaixo do limite didático. O controlador liga a irrigação.':'A umidade está acima do limite didático. O controlador mantém a irrigação desligada.';$('labTag').textContent=irrigate?'● IRRIGAÇÃO LIGADA':'● IRRIGAÇÃO DESLIGADA';document.querySelectorAll('[data-hum]').forEach(b=>b.classList.toggle('active',Number(b.dataset.hum)===n));}
+input.addEventListener('input',update);document.querySelectorAll('[data-hum]').forEach(b=>b.addEventListener('click',()=>{input.value=b.dataset.hum;update()}));update();
+document.querySelectorAll('[data-q]').forEach(btn=>btn.addEventListener('click',()=>{const q=btn.dataset.q;document.querySelectorAll('[data-q="'+q+'"]').forEach(b=>b.classList.toggle('chosen',b===btn));const correct=btn.dataset.correct==='true';$("fb"+q).textContent=correct?'Correto! '+(q==='1'?'4G, Wi-Fi, NB-IoT e outras tecnologias também podem conectar objetos.':'1 ms é um parâmetro técnico para um cenário de baixa latência, não uma garantia cotidiana.'):'Ainda não. '+(q==='1'?'A IoT pode usar diferentes tecnologias de rede.':'A latência real depende da configuração da rede e da aplicação.');$("fb"+q).style.color=correct?'var(--mint)':'var(--yellow)'}));
+const scroll=()=>{let h=document.documentElement;let max=h.scrollHeight-h.clientHeight;$('readingBar').style.width=(max>0?100*h.scrollTop/max:0)+'%'};addEventListener('scroll',scroll,{passive:true});scroll();
+if('IntersectionObserver' in window){const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.07});document.querySelectorAll('.reveal').forEach(e=>obs.observe(e));}else document.querySelectorAll('.reveal').forEach(e=>e.classList.add('visible'));
+
+// ── Escultura de rede: projeção tridimensional e conexões interativas ──
+const g=window.gsap;
+const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const modelText={
+ '4g':{kicker:'CONECTIVIDADE MÓVEL',title:'A base da internet móvel moderna.',desc:'O 4G atende navegação, streaming e muitos usos de IoT. Aqui, a escultura mostra uma malha simplificada apenas para comparação visual.',nodes:25},
+ '5g':{kicker:'MAIOR CAPACIDADE',title:'Conexões para diferentes necessidades.',desc:'O 5G foi projetado para suportar muitos dispositivos e serviços diversos, da banda larga à comunicação entre máquinas.',nodes:84},
+ 'iot':{kicker:'SENSORES E SISTEMAS',title:'Objetos conectados, decisões inteligentes.',desc:'Sensores enviam dados por uma rede compatível. Sistemas analisam as leituras e a automação pode executar ações no mundo físico.',nodes:54}
+};
+const globeCanvases=[];
+function createNetworkCanvas(canvas,{hero=false}={}){
+ if(!canvas)return null;
+ const ctx=canvas.getContext('2d',{alpha:true});if(!ctx)return null;
+ const phi=(1+Math.sqrt(5))/2;
+ const N=96;
+ const nodes=[];
+ for(let i=0;i<N;i++){
+   let y=1-2*(i+.5)/N,r=Math.sqrt(Math.max(0,1-y*y)),a=2*Math.PI*i/phi;
+   nodes.push({x:Math.cos(a)*r,y,z:Math.sin(a)*r,kind:i%7});
+ }
+ const edges=[];
+ for(let i=0;i<N;i++){
+   const nearby=[];
+   for(let j=0;j<N;j++)if(i!==j){let a=nodes[i],b=nodes[j];let d=(a.x-b.x)**2+(a.y-b.y)**2+(a.z-b.z)**2; nearby.push({j,d});}
+   nearby.sort((a,b)=>a.d-b.d);
+   for(let k=0;k<3;k++){let j=nearby[k].j;if(i<j)edges.push([i,j]);}
+ }
+ const scene={mode:'5g',density:hero?82:84,spin:hero?.0022:.003,energy:1,angleX:.1,angleY:.3,
+   targetX:.1,targetY:.3,phase:0,paused:false,dragging:false,lastX:0,lastY:0,w:480,h:420,visible:true};
+ const colors={mint:[244,137,67],cyan:[252,161,83],violet:[255,210,151]};
+ const context={canvas,ctx,nodes,edges,scene};
+ function resize(){let rect=canvas.getBoundingClientRect(),w=Math.max(10,rect.width),h=Math.max(10,rect.height),dpr=Math.min(window.devicePixelRatio||1,1.8);scene.w=w;scene.h=h;canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);render();}
+ function transform(p){let ay=scene.angleY,ax=scene.angleX;
+   let x=p.x*Math.cos(ay)+p.z*Math.sin(ay);
+   let z=-p.x*Math.sin(ay)+p.z*Math.cos(ay);
+   let y=p.y*Math.cos(ax)-z*Math.sin(ax);z=p.y*Math.sin(ax)+z*Math.cos(ax);
+   let scale=2.65/(3.8-z),size=Math.min(scene.w*.37,scene.h*.43);
+   return {x:scene.w/2+x*size*scale,y:scene.h/2+y*size*scale,z,scale};
+ }
+ function line(a,b,rgb,alpha=1,width=1){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle=`rgba(${rgb[0]},${rgb[1]},${rgb[2]},${alpha})`;ctx.lineWidth=width;ctx.stroke();}
+ function render(){const {w,h}=scene;if(w<10||h<10)return;
+  ctx.clearRect(0,0,w,h);
+  const radius=Math.min(w*.37,h*.43)*.9;
+  let halo=ctx.createRadialGradient(w/2,h/2,4,w/2,h/2,radius*1.45);
+  halo.addColorStop(0,'rgba(244,126,45,.13)');halo.addColorStop(.55,'rgba(234,107,31,.065)');halo.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=halo;ctx.fillRect(0,0,w,h);
+  // Rings cross the sculpture in three planes, providing depth and a recognizable 3D figure.
+  for(let r=0;r<3;r++){
+    let count=105,points=[];
+    for(let i=0;i<=count;i++){
+      let a=i/count*Math.PI*2;
+      let p=r===0?{x:Math.cos(a)*1.19,y:Math.sin(a)*.33,z:Math.sin(a)*1.19}:
+        r===1?{x:Math.cos(a)*.48,y:Math.sin(a)*1.14,z:Math.sin(a)*.96}:
+        {x:Math.cos(a)*1.04,y:Math.sin(a)*.92,z:Math.sin(a)*.40};
+      points.push(transform(p));
+    }
+    for(let i=1;i<points.length;i++){
+      let depth=(points[i-1].z+points[i].z)/2,al=(.04+Math.max(0,(depth+1.2)/2.4)*.19)*scene.energy;
+      line(points[i-1],points[i],r===2?colors.violet:colors.cyan,al,1.0);
+    }
+  }
+  const pp=nodes.map(transform);const n=Math.floor(scene.density),n2=scene.density-n;
+  // Network links, drawn behind the luminous nodes.
+  for(let i=0;i<edges.length;i++){
+    const [a,b]=edges[i];if(a>=n+1||b>=n+1)continue;
+    let alpha=(Math.min(a,b)>=n?.3:1)*(.12+.12*(pp[a].z+pp[b].z+2)/4);
+    if(scene.mode==='4g')alpha*=.65;
+    const rgb=scene.mode==='iot'?((a+b)%4===0?colors.violet:colors.mint):((a+b)%5===0?colors.violet:colors.cyan);
+    line(pp[a],pp[b],rgb,alpha*scene.energy,pp[a].z>0?.85:.57);
+  }
+  // Discrete animated data packets travel along connections.
+  if(!reduced){
+    ctx.save();ctx.shadowBlur=12;ctx.shadowColor='#ff9b51';
+    for(let i=0;i<edges.length;i+=5){const [a,b]=edges[i];if(a>=n||b>=n)continue;
+      let t=(scene.phase*.12+i*.019)%1;
+      let px=pp[a].x+(pp[b].x-pp[a].x)*t,py=pp[a].y+(pp[b].y-pp[a].y)*t;
+      ctx.beginPath();ctx.arc(px,py,(i%3===0?2.1:1.2)*(hero?.8:1),0,Math.PI*2);
+      ctx.fillStyle='rgba(255,157,70,.92)';ctx.fill();
+    }ctx.restore();
+  }
+  for(let i=0;i<=n&&i<N;i++){
+    const p=pp[i];const fade=i===n?n2:1;if(fade<=0)continue;
+    const size=(1.5+(p.z+1)*1.2)*(hero?.75:1);
+    const alpha=fade*(.43+.54*(p.z+1)/2);
+    ctx.save();ctx.shadowBlur=p.z>0?17:6;ctx.shadowColor=i%11===0?'#ffe1a7':'#fa8b39';
+    ctx.beginPath();ctx.arc(p.x,p.y,size,0,Math.PI*2);
+    ctx.fillStyle=i%11===0?`rgba(255,218,149,${alpha})`:`rgba(255,151,70,${alpha})`;ctx.fill();ctx.restore();
+    if(i%13===0&&p.z>0){ctx.beginPath();ctx.arc(p.x,p.y,size+5,0,Math.PI*2);ctx.lineWidth=.7;ctx.strokeStyle='rgba(255,183,98,.34)';ctx.stroke();}
+  }
+  // Center nucleus with a radial aura.
+  let ca=ctx.createRadialGradient(w/2,h/2,3,w/2,h/2,38);
+  ca.addColorStop(0,'rgba(255,205,153,.65)');ca.addColorStop(.22,'rgba(255,143,62,.27)');ca.addColorStop(1,'rgba(244,108,27,0)');
+  ctx.fillStyle=ca;ctx.beginPath();ctx.arc(w/2,h/2,38,0,Math.PI*2);ctx.fill();
+ }
+ canvas.addEventListener('pointerdown',e=>{scene.dragging=true;scene.lastX=e.clientX;scene.lastY=e.clientY;canvas.setPointerCapture?.(e.pointerId)});
+ canvas.addEventListener('pointermove',e=>{if(!scene.dragging)return;let dx=e.clientX-scene.lastX,dy=e.clientY-scene.lastY;scene.lastX=e.clientX;scene.lastY=e.clientY;scene.targetY+=dx*.009;scene.targetX=Math.max(-1.25,Math.min(1.25,scene.targetX+dy*.007));});
+ const stopDrag=()=>{scene.dragging=false};canvas.addEventListener('pointerup',stopDrag);canvas.addEventListener('pointercancel',stopDrag);canvas.addEventListener('lostpointercapture',stopDrag);
+ context.resize=resize;context.render=render;context.tick=(dt)=>{if(!scene.visible)return;
+  if(!scene.paused&&!reduced){if(!scene.dragging)scene.targetY+=dt*(hero?.0012:.0016);scene.phase+=dt*.055;}
+  scene.angleY+=(scene.targetY-scene.angleY)*Math.min(1,dt*.008);
+  scene.angleX+=(scene.targetX-scene.angleX)*Math.min(1,dt*.008);
+  render();};
+ context.setMode=mode=>{if(!modelText[mode])return;scene.mode=mode;const next=modelText[mode].nodes;
+  if(g&&!reduced)g.to(scene,{density:next,energy:mode==='4g'?.72:1,duration:.85,ease:'power2.inOut',overwrite:true});
+  else {scene.density=next;scene.energy=mode==='4g'?.72:1;render();}
+ };
+ new ResizeObserver(resize).observe(canvas);resize();globeCanvases.push(context);return context;
+}
+const heroNetwork=createNetworkCanvas($('heroNet'),{hero:true});
+const explorerNetwork=createNetworkCanvas($('explorerNet'));
+let frameLast=0;
+function tickNetworks(time){let dt=frameLast?Math.min(65,time-frameLast):16;frameLast=time;for(const c of globeCanvases)c.tick(dt);}
+// GSAP provides the frame ticker when available; a native animation loop is the offline fallback.
+if(g){g.ticker.add(()=>tickNetworks(performance.now()));}
+else{function raf(t){tickNetworks(t);requestAnimationFrame(raf)}requestAnimationFrame(raf)}
+const ioCanvasObserver=new IntersectionObserver(entries=>entries.forEach(e=>{for(const c of globeCanvases){if(c.canvas===e.target)c.scene.visible=e.isIntersecting}}),{rootMargin:'100px'});
+for(const c of globeCanvases)ioCanvasObserver.observe(c.canvas);
+const modes=document.querySelectorAll('[data-network-mode]');
+modes.forEach(btn=>btn.addEventListener('click',()=>{
+ const mode=btn.dataset.networkMode,item=modelText[mode];
+ modes.forEach(b=>{b.classList.toggle('active',b===btn);b.setAttribute('aria-pressed',String(b===btn))});
+ const labels=[['modeKicker',item.kicker],['modeTitle',item.title],['modeDescription',item.desc],['nodeCounter',String(item.nodes)]];
+ if(g&&!reduced){g.to('.network-mode-content',{opacity:0,y:9,duration:.14,onComplete:()=>{
+  for(const [id,value] of labels)$(id).textContent=value;
+  g.to('.network-mode-content',{opacity:1,y:0,duration:.3,ease:'power2.out'});
+ }});}
+ else for(const [id,value]of labels)$(id).textContent=value;
+ $('networkState').textContent=explorerNetwork?.scene.paused?'PAUSADO':'ATIVO';
+ explorerNetwork?.setMode(mode);
+}));
+$('pauseNetBtn').addEventListener('click',e=>{const c=explorerNetwork.scene;c.paused=!c.paused;
+ $('networkState').textContent=c.paused?'PAUSADO':'ATIVO';
+ const b=e.currentTarget;b.setAttribute('aria-pressed',String(c.paused));b.innerHTML=c.paused?'▷ <span>Retomar</span>':'Ⅱ <span>Pausar</span>';
+});
+function runPacket(){
+ const stages=[...document.querySelectorAll('#traceSteps .trace-step')];
+ const dots=[...document.querySelectorAll('#traceSteps .trace-dot')];
+ const button=$('transmitBtn');
+ if(button.disabled)return;button.disabled=true;
+ stages.forEach(x=>x.classList.remove('route-active'));
+ dots.forEach(x=>{x.style.opacity=0;x.style.left='0%'});
+ $('packetStatus').textContent='Pacote iniciado: sensor coletou uma leitura.';
+ if(g&&!reduced){
+  const tl=g.timeline({onComplete:()=>{button.disabled=false;$('packetStatus').textContent='Pacote entregue. O sistema pode executar a ação prevista.'}});
+  stages.forEach((stage,i)=>{
+    tl.call(()=>{stage.classList.add('route-active');$('packetStatus').textContent=['Sensor registrou o dado.','Rede encaminhou o dado.','Software analisou a leitura.','Automação recebeu o comando.'][i]},[],i*.75);
+    if(i<dots.length){tl.set(dots[i],{opacity:1,xPercent:0},i*.75+.15).fromTo(dots[i],{left:'0%'},{left:'100%',duration:.42,ease:'power1.inOut'},i*.75+.18).to(dots[i],{opacity:0,duration:.18},i*.75+.62)}
+  });
+  tl.to(stages,{opacity:1,duration:.1},'>');
+ }else{
+  stages.forEach(x=>x.classList.add('route-active'));$('packetStatus').textContent='Pacote entregue: sensor → rede → análise → ação.';button.disabled=false;
+ }
+}
+$('transmitBtn').addEventListener('click',runPacket);
+// Improve the existing didactic irrigation simulation with animated transitions.
+let lastIrrigationState=null;
+const humidityRange=$('humidity');
+function animateIrrigation(){const value=Number(humidityRange.value),now=value<35;
+  if(g&&!reduced){
+    g.fromTo('#humidityValue',{scale:.88},{scale:1,duration:.32,ease:'back.out(2)',overwrite:true});
+    if(now!==lastIrrigationState){
+      g.fromTo('#decision',{scale:.985,boxShadow:'0 0 0px rgba(240,112,32,0)'},{scale:1,boxShadow:now?'0 0 29px rgba(240,112,32,.13)':'0 0 0px rgba(240,112,32,0)',duration:.5,ease:'power2.out',overwrite:true});
+    }
+  }
+  lastIrrigationState=now;
+}
+humidityRange.addEventListener('input',animateIrrigation);
+document.querySelectorAll('[data-hum]').forEach(btn=>btn.addEventListener('click',animateIrrigation));
+// GSAP + ScrollTrigger choreography. Content remains visible if external scripts are unavailable.
+if(g&&!reduced){
+  const begin=()=>{
+   g.set('.hero .eyebrow,.hero h1,.hero h2,.hero p,.hero-buttons',{willChange:'transform,opacity'});
+   const intro=g.timeline({defaults:{ease:'power3.out'}});
+   intro.from('.hero .eyebrow',{opacity:0,y:22,duration:.65})
+     .from('.hero h1',{opacity:0,y:45,scale:.92,duration:1},'-.35')
+     .from('.hero h2',{opacity:0,y:25,duration:.73},'-.64')
+     .from('.hero p',{opacity:0,y:18,duration:.6},'-.49')
+     .from('.hero-buttons',{opacity:0,y:14,duration:.55},'-.44')
+     .from('.hero-visual',{opacity:0,scale:.92,rotateX:7,duration:1.05},.15)
+     .from('.metrics .metric',{opacity:0,y:24,stagger:.12,duration:.53},'-.5');
+   g.to('.hero .tn-one',{y:-8,duration:2.6,yoyo:true,repeat:-1,ease:'sine.inOut'});
+   g.to('.hero .tn-two',{y:7,duration:3.4,yoyo:true,repeat:-1,ease:'sine.inOut'});
+   g.to('.signal-visual i',{scaleY:()=>.3+Math.random()*.7,opacity:()=>.45+Math.random()*.55,stagger:{each:.055,from:'random'},duration:.45,repeat:-1,yoyo:true,ease:'sine.inOut'});
+   if(window.ScrollTrigger){
+    g.registerPlugin(window.ScrollTrigger);
+    g.utils.toArray('.section').forEach(section=>{
+      g.fromTo(section,{opacity:.58,y:44},{opacity:1,y:0,duration:.85,ease:'power2.out',scrollTrigger:{trigger:section,start:'top 86%',once:true}});
+    });
+    g.utils.toArray('.info-btn, .use.card, .challenge.card, .pipe').forEach(el=>{
+      g.fromTo(el,{opacity:.6,y:18},{opacity:1,y:0,duration:.7,scrollTrigger:{trigger:el,start:'top 95%',once:true}});
+    });
+    g.to('.network-stage',{backgroundPosition:'0 -20px',ease:'none',scrollTrigger:{trigger:'.net-section',start:'top bottom',end:'bottom top',scrub:1}});
+   }
+  };
+  if(document.readyState==='complete')begin();else window.addEventListener('load',begin,{once:true});
+}
+
+})();
+</script>
+
+<script>
+/* WebGL torre 5G: modelo geométrico próprio. Operação didática, não propagação de RF real. */
+(()=>{
+const stage=document.getElementById('towerStage'),canvas=document.getElementById('towerCanvas'),fallback=document.getElementById('towerFallback');
+const powerBtn=document.getElementById('signalToggle'), viewBtn=document.getElementById('towerViewToggle');
+const prefersReduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let powered=true,technical=false;
+if(!stage||!canvas)return;
+if(!window.THREE){
+  powerBtn?.addEventListener('click',()=>{powered=!powered;powerBtn.classList.toggle('active',powered);powerBtn.setAttribute('aria-pressed',String(powered)); fallback.style.opacity=powered?'.95':'.55';});
+  viewBtn?.addEventListener('click',()=>{technical=!technical;viewBtn.classList.toggle('active',technical);viewBtn.setAttribute('aria-pressed',String(technical));fallback.style.transform=technical?'rotate(-4deg)':'';});
+  return;
+}
+const T=window.THREE;
+let renderer;
+try{renderer=new T.WebGLRenderer({canvas,alpha:true,antialias:true,powerPreference:'high-performance'});}catch(e){console.warn('WebGL indisponível',e);return}
+renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,1.5));
+renderer.setClearColor(0xf6f3ef,0);
+renderer.outputEncoding=T.sRGBEncoding;
+renderer.toneMapping=T.ACESFilmicToneMapping;
+renderer.toneMappingExposure=1.28;
+const scene=new T.Scene();scene.fog=new T.FogExp2(0xf7f3ee,.012);
+const camera=new T.PerspectiveCamera(35,1,.1,100);
+const cameraTarget=new T.Vector3(0,3.45,0);
+camera.position.set(17.4,9.1,20.5);camera.lookAt(cameraTarget);
+const ambient=new T.AmbientLight(0xffffff,1.55);scene.add(ambient);
+const hemisphere=new T.HemisphereLight(0xffffff,0x8c8c86,1.5);scene.add(hemisphere);
+const key=new T.DirectionalLight(0xffffff,2.25);key.position.set(-7,12,9);scene.add(key);
+const fill=new T.PointLight(0xef7b31,65,22,2);fill.position.set(5,6,-4);scene.add(fill);
+const rim=new T.PointLight(0xe3a173,60,18,2);rim.position.set(-5,5,6);scene.add(rim);
+const warm=new T.PointLight(0xf16d24,28,9,2);warm.position.set(0,10,-2);scene.add(warm);
+const tower=new T.Group();scene.add(tower);
+const mat=(color,roughness=.45,metalness=.6,emissive=0x000000,intensity=0)=>new T.MeshStandardMaterial({color,roughness,metalness,emissive,emissiveIntensity:intensity});
+const steel=mat(0x89918f,.36,.83),brace=mat(0x3f4748,.45,.81),silver=mat(0xe1e5e3,.31,.54),dark=mat(0x161b1c,.46,.65),blue=mat(0xf28031,.26,.5,0xc65411,.28),violet=mat(0x6e6c68,.36,.7,0x6b6763,.08),pink=mat(0xff9a41,.33,.45,0xd96216,.85);
+const glass=new T.MeshPhysicalMaterial({color:0xffb175,metalness:.35,roughness:.2,transparent:true,opacity:.88,emissive:0xd65c1c,emissiveIntensity:.4});
+function mesh(g,m,parent=tower){let o=new T.Mesh(g,m);parent.add(o);return o}
+function beam(a,b,r,material,parent=tower){a=new T.Vector3(...a);b=new T.Vector3(...b);const len=a.distanceTo(b),o=mesh(new T.CylinderGeometry(r*.88,r,len,8),material,parent);o.position.copy(a).add(b).multiplyScalar(.5);o.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),b.clone().sub(a).normalize());return o}
+function box(w,h,d,m,pos,parent=tower){let o=mesh(new T.BoxGeometry(w,h,d),m,parent);o.position.set(...pos);return o}
+function ring(r,y,color=0xee742a,opacity=.5,thickness=.015){const o=new T.Mesh(new T.TorusGeometry(r,thickness,8,128),new T.MeshBasicMaterial({color,transparent:true,opacity,depthWrite:false,blending:T.AdditiveBlending}));o.rotation.x=Math.PI/2;o.position.y=y;tower.add(o);return o}
+const floor=mesh(new T.CylinderGeometry(2.62,2.72,.14,64),dark);floor.position.y=.05;
+const floorTop=mesh(new T.CylinderGeometry(2.4,2.4,.03,64),mat(0x414444,.4,.65));floorTop.position.y=.14;
+ring(2.38,.2,0xf18237,.5,.025);ring(2.65,.02,0x494949,.22,.024);
+const grid=new T.GridHelper(22,28,0xa8a29c,0xd4d0ca);grid.position.y=-.035;grid.material.transparent=true;grid.material.opacity=.20;scene.add(grid);
+// Four-leg tapered steel lattice, galvanized panels and cross bracing.
+const height=8.65,base=.98,top=.26,levels=14;
+function point(i,y){const u=(y-.25)/(height-.25),rad=base+(top-base)*u,theta=Math.PI/4+i*Math.PI/2;return [Math.cos(theta)*rad,y,Math.sin(theta)*rad]}
+for(let i=0;i<4;i++){beam(point(i,.25),point(i,height),.075,steel);
+ for(let k=0;k<levels;k++){let y=.3+k*(height-.4)/levels;let ny=.3+(k+1)*(height-.4)/levels;beam(point(i,y),point((i+1)%4,ny),.019,brace);beam(point((i+1)%4,y),point(i,ny),.019,brace);}
+}
+for(let k=1;k<=levels;k++){let y=.3+k*(height-.4)/levels;
+ for(let i=0;i<4;i++){beam(point(i,y),point((i+1)%4,y),.027,k%4===0?silver:brace)}
+}
+for(let j=0;j<3;j++){let y=2.5+j*2.3;box(.08,.23,.08,blue,[0,y,0])}
+// Three-sector directional panel antennas.
+for(let s=0;s<3;s++){
+ const a=s*Math.PI*2/3+.3;
+ for(let n=0;n<2;n++){
+ let y=7.55+n*.69;
+ const pos=[Math.cos(a)*.62,y,Math.sin(a)*.62];
+ const holder=box(.10,.16,.52,brace,pos);holder.rotation.y=-a;
+ const panel=box(.17,.97,.40,silver,[Math.cos(a)*.81,y,Math.sin(a)*.81]);panel.rotation.y=-a;
+ const stripe=box(.025,.78,.28,glass,[Math.cos(a)*.90,y,Math.sin(a)*.90]);stripe.rotation.y=-a;
+ }
+}
+// Larger vertical radomes, top beacon and service discs.
+for(let i=0;i<4;i++){
+ const a=i*Math.PI/2+Math.PI/4;
+ let rad=.39,y=6.92;
+ const antenna=box(.26,1.05,.20,silver,[Math.cos(a)*rad,y,Math.sin(a)*rad]);antenna.rotation.y=-a;
+}
+const mast=mesh(new T.CylinderGeometry(.055,.072,1.85,10),steel);mast.position.y=9.3;
+const beacon=mesh(new T.SphereGeometry(.105,16,12),pink);beacon.position.y=10.3;
+const mastLight=new T.PointLight(0xf47a24,25,5);mastLight.position.y=10.3;tower.add(mastLight);
+const halo=mesh(new T.SphereGeometry(.25,16,12),new T.MeshBasicMaterial({color:0xf58d38,transparent:true,opacity:.19,depthWrite:false}));halo.position.y=10.3;
+// Microwave dish on one side of frame.
+const dish=new T.Group();tower.add(dish);dish.position.set(-.73,6.12,.32);dish.rotation.set(-.2,-.45,.2);
+const bowl=new T.Mesh(new T.SphereGeometry(.55,30,12,0,Math.PI*2,0,Math.PI*.46),silver);bowl.rotation.x=Math.PI/2;dish.add(bowl);
+const dishCap=new T.Mesh(new T.CylinderGeometry(.37,.37,.04,32),glass);dishCap.rotation.x=Math.PI/2;dishCap.position.z=.1;dish.add(dishCap);
+// Illuminated 5G display facing camera initially.
+const screen=new T.Group();screen.position.set(0,5.35,.5);tower.add(screen);
+const display=box(1.28,.83,.10,dark,[0,0,0],screen);display.material=mat(0x222426,.3,.65,0x392113,.1);
+const frame=box(1.39,.92,.065,blue,[0,0,-.07],screen);
+const face=box(1.27,.80,.055,dark,[0,0,.075],screen);
+const tc=document.createElement('canvas');tc.width=512;tc.height=280;
+const cx=tc.getContext('2d');cx.fillStyle='#14191b';cx.fillRect(0,0,512,280);cx.fillStyle='#fff3e8';cx.font='bold 182px Arial';cx.textAlign='center';cx.textBaseline='middle';cx.shadowColor='#ff8a39';cx.shadowBlur=25;cx.fillText('5G',256,146);
+const texture=new T.CanvasTexture(tc);texture.encoding=T.sRGBEncoding;
+const label=mesh(new T.PlaneGeometry(1.20,.73),new T.MeshBasicMaterial({map:texture,transparent:true,side:T.DoubleSide}),screen);label.position.z=.111;
+// Radio rings and layered orbital telemetry.
+const waves=[];
+for(let i=0;i<4;i++){const wave=ring(1.35+i*.75,8.28, i%2?0xf6a25b:0xe36c1f,.35,.019);waves.push(wave)}
+const orbit1=ring(2.9,4.45,0xef893f,.19,.012),orbit2=ring(3.6,6.25,0xf1a66c,.15,.009);
+const markers=[];
+for(let i=0;i<7;i++){
+ let a=i*2.399,r=2.2+(i%3)*.42,y=1.1+(i%4)*1.2;
+ const ball=mesh(new T.SphereGeometry(.065,10,8),new T.MeshBasicMaterial({color:i%2?0x434344:0xef8333}));ball.position.set(Math.cos(a)*r,y,Math.sin(a)*r);markers.push(ball);
+}
+// Floating packets follow real Three.js curves. Data pulses are decorative.
+const curves=[],packets=[];
+for(let i=0;i<13;i++){
+ const angle=i*Math.PI*2/13,r=4.0+(i%3)*.58,finish=new T.Vector3(Math.cos(angle)*r,1.2+(i%4)*.86,Math.sin(angle)*r),
+ start=new T.Vector3(0,7.35,0),mid=start.clone().lerp(finish,.55).add(new T.Vector3(0,1.1,0));
+ const c=new T.QuadraticBezierCurve3(start,mid,finish),points=c.getPoints(55);
+ const path=new T.Line(new T.BufferGeometry().setFromPoints(points),new T.LineBasicMaterial({color:i%3===0?0xf4ae75:0xe77b34,transparent:true,opacity:.12,blending:T.AdditiveBlending,depthWrite:false}));
+ scene.add(path);curves.push({c,path});
+ const p=new T.Mesh(new T.SphereGeometry(.060,12,9),new T.MeshBasicMaterial({color: i%3===0?0xf8b27e:0xf38135,transparent:true,opacity:.92,blending:T.AdditiveBlending,depthWrite:false}));p.userData.speed=.09+(i%4)*.018;p.userData.phase=i/13;scene.add(p);packets.push(p);
+}
+// Star particles.
+const count=240,vertices=[];for(let i=0;i<count;i++){const a=i*2.399,b=(i/count)*Math.PI*2,r=8+(i*31%80)/10;vertices.push(Math.cos(a)*r,1+(i*7%120)/10,Math.sin(a)*r)}
+const starGeo=new T.BufferGeometry();starGeo.setAttribute('position',new T.Float32BufferAttribute(vertices,3));const stars=new T.Points(starGeo,new T.PointsMaterial({color:0xa5a09b,size:.034,transparent:true,opacity:.45,sizeAttenuation:true}));scene.add(stars);
+let shouldRender=true,spin=0,time=0,last=performance.now(),drag=false,fromX=0,fromY=0,targetSpin=0,targetTilt=.04,tilt=.04;
+const cPos=new T.Vector3();
+function resize(){const r=stage.getBoundingClientRect();const w=Math.max(1,r.width),h=Math.max(1,r.height);renderer.setSize(w,h,false);camera.aspect=w/h;camera.position.set(w<550?21.5:19,w<550?10.2:9.6,w<550?25:23);camera.fov=w<550?41:39;camera.updateProjectionMatrix();camera.lookAt(cameraTarget)}
+new ResizeObserver(resize).observe(stage);resize();
+const stop=(e)=>{drag=false;if(e?.pointerId!=null)try{canvas.releasePointerCapture(e.pointerId)}catch{}};
+canvas.addEventListener('pointerdown',e=>{drag=true;fromX=e.clientX;fromY=e.clientY;canvas.setPointerCapture(e.pointerId)});
+canvas.addEventListener('pointermove',e=>{if(!drag)return;targetSpin+=(e.clientX-fromX)*.006;targetTilt=Math.max(-.14,Math.min(.17,targetTilt+(e.clientY-fromY)*.002));fromX=e.clientX;fromY=e.clientY});
+canvas.addEventListener('pointerup',stop);canvas.addEventListener('pointercancel',stop);
+powerBtn?.addEventListener('click',()=>{powered=!powered;powerBtn.classList.toggle('active',powered);powerBtn.setAttribute('aria-pressed',String(powered));stage.querySelector('.tower-top-left span:nth-child(2)').textContent=powered?'TORRE 5G':'ANIMAÇÃO PAUSADA'});
+viewBtn?.addEventListener('click',()=>{technical=!technical;viewBtn.classList.toggle('active',technical);viewBtn.setAttribute('aria-pressed',String(technical));targetSpin=technical?Math.PI*.37:0;targetTilt=technical?.105:.04;
+ if(window.gsap&&!prefersReduced){window.gsap.fromTo('.tower-bottom-panel',{scale:.98},{scale:1,duration:.4,ease:'power2.out'})}
+});
+if('IntersectionObserver' in window)new IntersectionObserver(entries=>{shouldRender=entries[0].isIntersecting},{rootMargin:'170px'}).observe(stage);
+function animate(now){requestAnimationFrame(animate);const dt=Math.min(.05,(now-last)/1000);last=now;if(!shouldRender)return;
+const move=powered&&!prefersReduced;time+=move?dt:0;
+spin+=(targetSpin-spin)*.075;if(move&&!drag)spin+=dt*.08;
+tilt+=(targetTilt-tilt)*.06;tower.rotation.set(tilt,spin,0);
+if(move){for(let i=0;i<waves.length;i++){const w=waves[i],p=((time*.17+i*.255)%1);w.scale.setScalar(.83+p*.36);w.material.opacity=(1-p)*.50;w.position.y=8.1+i*.008+Math.sin(time*1.4+i)*.025}for(let i=0;i<packets.length;i++){const packet=packets[i],p=(time*packet.userData.speed+packet.userData.phase)%1;packet.position.copy(curves[i].c.getPointAt(p));packet.material.opacity=Math.sin(p*Math.PI)*.95;}}
+else {waves.forEach((w,i)=>{w.material.opacity=.09;w.scale.setScalar(1)});packets.forEach(p=>{p.material.opacity=.1})}
+beacon.material.emissiveIntensity=move?(.7+.5*Math.sin(time*4)):0;halo.material.opacity=move?(.13+.1*Math.sin(time*3)):.08;
+renderer.render(scene,camera)}
+canvas.style.opacity='1';fallback.style.opacity='0';requestAnimationFrame(animate);
+if(window.gsap&&!prefersReduced){gsap.fromTo('.tower-top-left,.tower-bottom-panel,.tower-floating-node',{opacity:0,y:12},{opacity:1,y:0,duration:.75,stagger:.1,ease:'power2.out',delay:.3})}
+})();
+</script>
+</body>
+</html>
